@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlTopTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/text">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/arrow_left" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_textsize"
+                android:text="压端子" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="用户编号:" />
+
+                <TextView
+                    android:id="@+id/tvUserID"
+                    style="@style/My_Right_TextView" />
+
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="工票:" />
+
+                <TextView
+                    android:id="@+id/tvGP"
+                    style="@style/My_Right_TextView" />
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="批量:" />
+
+                <TextView
+                    android:id="@+id/tvPL"
+                    style="@style/My_Right_TextView2" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    android:visibility="gone"
+                    style="@style/My_Left_TextView1"
+                    android:text="工单:" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tvGD"
+                    style="@style/My_Right_TextView" />
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="批号:" />
+
+                <TextView
+                    android:id="@+id/tvPH"
+                    style="@style/My_Right_TextView" />
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView"
+                    android:text="条码:" />
+
+                <EditText
+                    android:id="@+id/etTM"
+                    style="@style/My_Right_TextView"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="此处显示扫描结果"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="完工数量:"
+                        />
+
+                    <EditText
+                        android:id="@+id/tvWGSL"
+                        android:background="@null"
+                        style="@style/My_Right_TextView"
+                        android:inputType="number"
+                        android:digits="0123456789."/>
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="不良数量:" />
+
+                    <EditText
+                        android:text="0"
+                        android:background="@null"
+                        android:id="@+id/tvBLSL"
+                        style="@style/My_Right_TextView"
+                        android:inputType="number"
+                        android:digits="0123456789."/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView1"
+                        android:text="不良原因:" />
+
+                    <EditText
+                        android:id="@+id/tvBLYY"
+                        android:background="@null"
+                        style="@style/My_Right_TextView" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="压着次数数量:" />
+
+                    <EditText
+                        android:id="@+id/etYZCSSL"
+                        style="@style/My_Right_TextView"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:digits="0123456789."
+                        />
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="压着确认外观            :" />
+
+                    <RadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_yzqrwg_hg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="合格" />
+
+                        <RadioButton
+                            android:id="@+id/rb_yzqrwg_bhg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="不合格" />
+                    </RadioGroup>
+                    />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="检查员拉力与外观终:" />
+
+                    <RadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_jcy_hg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="合格" />
+
+                        <RadioButton
+                            android:id="@+id/rb_jcy_bhg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="不合格" />
+                    </RadioGroup>
+                    />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    style="@style/My_Button"
+                    android:text="结束" />
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

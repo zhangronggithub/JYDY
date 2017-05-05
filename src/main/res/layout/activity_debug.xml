@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include 
+        layout="@layout/top_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/radius_drawable_bg2"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HTTP_IP:" 
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text"/>
+
+        <EditText
+            android:id="@+id/etIP"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:singleLine="true"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+         android:background="@drawable/radius_drawable_bg2"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HTTP_PATH :"
+            android:gravity="center"
+            android:layout_marginLeft="5dp" 
+            android:textColor="@color/text"/>
+
+        <EditText
+            android:id="@+id/etHTTP_PATH"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" 
+        android:background="@drawable/radius_drawable_bg2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NameSpace:" 
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text"/>
+
+        <EditText
+            android:id="@+id/etNameSpace"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+         android:background="@drawable/radius_drawable_bg2" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="原材料条码长度:"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text" />
+
+        <EditText
+            android:id="@+id/etYCLTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/radius_drawable_bg2"  >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="半成品条码长度:"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text" />
+
+        <EditText
+            android:id="@+id/etBCPTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" 
+        android:background="@drawable/radius_drawable_bg2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="成品条码长度:"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text" />
+
+        <EditText
+            android:id="@+id/etCPTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" 
+        android:background="@drawable/radius_drawable_bg2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="库位条码长度:"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text" />
+
+        <EditText
+            android:id="@+id/etKWTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" 
+        android:background="@drawable/radius_drawable_bg2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="箱条码长度:" 
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text"/>
+
+        <EditText
+            android:id="@+id/etXTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal" 
+        android:background="@drawable/radius_drawable_bg2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="托盘条码长度:"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/text" />
+
+        <EditText
+            android:id="@+id/etTPTMCD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        >
+
+        <Button
+            android:id="@+id/btnSure"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="更新"
+            android:textColor="@color/text"
+            android:background="@drawable/text_bg3" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#50000000"
+    android:layout_gravity="center_horizontal"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="150dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/text_bg5"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+             >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:text="注册！" />
+            <ImageView
+                android:id="@+id/ivExit"
+                android:layout_alignParentRight="true"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/exit" />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="序列号："
+            android:textColor="@color/text"/>
+        <TextView
+            android:id="@+id/tvIMEI"
+            android:background="@drawable/kuang2"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/text"/>
+
+    <TextView
+        android:id="@+id/tvContent" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="注册码："
+        android:textColor="@color/text"/>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="@drawable/kuang2">
+            <com.jydy.pda.view.HPEditText
+                android:id="@+id/etForm"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:layout_height="30dp"
+                android:singleLine="true"
+                android:background="@null"/>
+            <ImageView
+                android:id="@+id/ivSaoma"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="5dp"
+                />
+
+        </LinearLayout>
+
+
+         <Button 
+            android:id="@+id/btnNext"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+             android:layout_gravity="center_horizontal"
+             android:padding="5dp"
+             android:layout_marginTop="10dp"
+            android:textColor="@color/text"
+            android:background="@drawable/text_bg3"
+            android:text="下一步"/>
+
+    </LinearLayout>
+</LinearLayout>

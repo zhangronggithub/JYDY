@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rlTopTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/text">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/arrow_left" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/title_textsize"
+                android:text="接线" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="用户编号:"
+                     />
+
+                <TextView
+                    android:id="@+id/tvUserID"
+                    style="@style/My_Right_TextView" />
+
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="工票:" />
+
+                <TextView
+                    android:id="@+id/tvGP"
+                    style="@style/My_Right_TextView" />
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="批量:" />
+
+                <TextView
+                    android:id="@+id/tvPL"
+                    style="@style/My_Right_TextView2" />
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="件号:" />
+
+                <TextView
+                    android:id="@+id/tvJH"
+                    style="@style/My_Right_TextView" />
+
+                <TextView
+                    style="@style/My_Left_TextView1"
+                    android:text="批号:" />
+
+                <TextView
+                    android:id="@+id/tvPH"
+                    style="@style/My_Right_TextView2" />
+
+            </LinearLayout>
+
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout
+                    style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView2"
+                        android:text="条码:" />
+
+                    <EditText
+                        android:id="@+id/etTM"
+                        style="@style/My_Right_TextView"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="此处显示扫描结果"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView2"
+                        android:text="模具:" />
+
+                    <TextView
+                        android:id="@+id/tvMJ"
+                        style="@style/My_Right_TextView" />
+
+                </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView2"
+                    android:text="作业员:" />
+
+                <TextView
+                    android:id="@+id/tvZYY"
+                    style="@style/My_Right_TextView" />
+
+            </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="接线类型:" />
+
+                    <TextView
+                        android:id="@+id/tvJXLX"
+                        style="@style/My_Right_TextView" />
+                </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout style="@style/My_LinearLayout">
+
+                <TextView
+                    style="@style/My_Left_TextView"
+                    android:text="辅助类型:" />
+
+                <TextView
+                    android:id="@+id/tvFZLX"
+                    style="@style/My_Right_TextView" />
+            </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="线号检查:" />
+
+                    <RadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_xhjc_hg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="合格" />
+
+                        <RadioButton
+                            android:id="@+id/rb_xhjc_bhg"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:button="@null"
+                            android:drawableLeft="@drawable/radio_button_selector"
+                            android:text="不合格" />
+                    </RadioGroup>
+                    />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="端子名:" />
+
+                    <TextView
+                        android:id="@+id/tvDZM"
+                        style="@style/My_Right_TextView"
+                        android:background="@null"
+                        />
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="实测值始:" />
+
+                    <EditText
+                        android:id="@+id/etSCZS"
+                        style="@style/My_Right_TextView"
+                        android:background="@null"
+                        />
+
+                </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    style="@style/My_Button"
+                    android:text="开始" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</FrameLayout>
