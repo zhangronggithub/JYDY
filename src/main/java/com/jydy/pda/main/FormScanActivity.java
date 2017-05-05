@@ -248,6 +248,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("PL", PL);
                             intent.putExtra("JH", JH);
                             intent.putExtra("LOTNO", LOTNO);
+
                             startActivity(intent);
                         } else if (GPZT.equals("2")) {
                             Intent intent = new Intent(FormScanActivity.this, JXJSActivity.class);
