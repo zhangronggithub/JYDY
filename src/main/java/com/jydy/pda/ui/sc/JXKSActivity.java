@@ -76,7 +76,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.btnSave)
     Button btnSave;
 
-    String xhjc,flag,error,type,ID,NAME;
+    String xhjc,flag,error,type,ID,NAME,MAXSCZS,MINSCZS;
     String GD, GP, GY, PL, LOTNO,JH;
     String[] strJXLX,strFZLX,strDZM;
     boolean[] selectedJXLX, selectedFZLX, selectedDZM;
@@ -111,12 +111,13 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
         PL = getIntent().getStringExtra("PL");
         JH = getIntent().getStringExtra("JH");
         LOTNO = getIntent().getStringExtra("LOTNO");
+        MAXSCZS = getIntent().getStringExtra("MAXSCZS");
+        MINSCZS = getIntent().getStringExtra("MINSCZS");
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvPH.setText(LOTNO);
         tvJH.setText(JH);
         tvUserID.setText(Constants.USERID);
-
     }
 
     @Override
@@ -191,6 +192,9 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 }else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(JXKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

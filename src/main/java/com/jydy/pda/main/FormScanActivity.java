@@ -49,7 +49,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private Dialog myWaitDialog;
 
-    private String MINSCZS,MAXSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL;
+    private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL;
 
     @Override
     protected int getContentLayout() {
@@ -188,11 +188,14 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 JXCS = DecodeXml.decodeXml(str, "JXCS");
                 MINSCZS = DecodeXml.decodeXml(str, "MINSCZS");
                 MAXSCZS = DecodeXml.decodeXml(str, "MAXSCZS");
+                MINSCZZ2 = DecodeXml.decodeXml(str, "MINSCZZ2");
+                MAXSCZZ2 = DecodeXml.decodeXml(str, "MAXSCZZ2");
                 MINYZDZJLL = DecodeXml.decodeXml(str, "MINYZDZJLL");
                 MAXYZDZJLL = DecodeXml.decodeXml(str, "MAXYZDZJLL");
                 MINYZDZYLL = DecodeXml.decodeXml(str, "MINYZDZYLL");
                 MAXYZDZYLL = DecodeXml.decodeXml(str, "MAXYZDZYLL");
-
+                MINLL = DecodeXml.decodeXml(str, "MINLL");
+                MAXLL = DecodeXml.decodeXml(str, "MAXLL");
 
                 if (flag.equals("S")) {
                     Logs.d(TAG, "111111");
@@ -223,6 +226,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("GY", etGyForm.getText().toString());
                             intent.putExtra("GP", etGpForm.getText().toString());
                             intent.putExtra("PL", PL);
+                            intent.putExtra("MAXSCZZ2",MAXSCZZ2);
+                            intent.putExtra("MINSCZZ2",MINSCZZ2);
                             startActivity(intent);
                         }else if(GPZT.equals("3")) {
                             Toast.makeText(FormScanActivity.this, "此工票已完工！", Toast.LENGTH_SHORT).show();
@@ -237,6 +242,14 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("LOTNO", LOTNO);
                             intent.putExtra("JDLLZ", JDLLZ);
                             intent.putExtra("YDLLZ", YDLLZ);
+                            intent.putExtra("MINSCZS", MINSCZS);
+                            intent.putExtra("MAXSCZS", MAXSCZS);
+                            intent.putExtra("MINYZDZJLL", MINYZDZJLL);
+                            intent.putExtra("MAXYZDZJLL", MAXYZDZJLL);
+                            intent.putExtra("MINYZDZYLL", MINYZDZYLL);
+                            intent.putExtra("MAXYZDZYLL", MAXYZDZYLL);
+                            intent.putExtra("MINLL", MINLL);
+                            intent.putExtra("MAXLL", MAXLL);
                             startActivity(intent);
                         } else if (GPZT.equals("2")) {
                             Intent intent = new Intent(FormScanActivity.this, YDZJSActivity.class);
@@ -262,7 +275,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("PL", PL);
                             intent.putExtra("JH", JH);
                             intent.putExtra("LOTNO", LOTNO);
-
+                            intent.putExtra("MINSCZS", MINSCZS);
+                            intent.putExtra("MAXSCZS", MAXSCZS);
                             startActivity(intent);
                         } else if (GPZT.equals("2")) {
                             Intent intent = new Intent(FormScanActivity.this, JXJSActivity.class);
@@ -271,6 +285,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("GP", etGpForm.getText().toString());
                             intent.putExtra("PL", PL);
                             intent.putExtra("LOTNO", LOTNO);
+                            intent.putExtra("MAXSCZZ2",MAXSCZZ2);
+                            intent.putExtra("MINSCZZ2",MINSCZZ2);
                             startActivity(intent);
                         }else if(GPZT.equals("3")) {
                             Toast.makeText(FormScanActivity.this, "此工票已完工！", Toast.LENGTH_SHORT).show();

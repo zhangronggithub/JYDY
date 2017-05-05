@@ -232,10 +232,10 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                    Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJKSActivity.this, "甲端拉力值必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJKSActivity.this, "乙端拉力值必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                 Thread mThread = new Thread(nextRunnable);
                 mThread.start();

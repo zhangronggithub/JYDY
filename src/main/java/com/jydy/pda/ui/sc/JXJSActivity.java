@@ -77,7 +77,7 @@ public class JXJSActivity extends BaseActivity {
 
     String yzwgqr,flag,error,type,ID,NAME;
 
-    String GD, GP, GY, PL;
+    String GD, GP, GY, PL,MAXSCZZ2,MINSCZZ2;
     @Override
     protected int getContentLayout() {
         return R.layout.activity_jxjs;
@@ -100,6 +100,8 @@ public class JXJSActivity extends BaseActivity {
         GY = getIntent().getStringExtra("GY");
         GP = getIntent().getStringExtra("GP");
         PL = getIntent().getStringExtra("PL");
+        MAXSCZZ2 = getIntent().getStringExtra("MAXSCZZ2");
+        MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvUserID.setText(Constants.USERID);
@@ -168,6 +170,9 @@ public class JXJSActivity extends BaseActivity {
                 }else if (TextUtils.isEmpty(etYZSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "请输入压着数量！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(JXJSActivity.this, "实测值终必须在"+MINSCZZ2+"~"+MAXSCZZ2+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.jydy.pda.R.id.etSCZS;
 import static com.jydy.pda.R.id.tvBB;
 import static com.jydy.pda.R.id.tvSB;
 
@@ -47,7 +48,7 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
 
     EditText etTM, etWGSL, etBLSL, etSCZZ;
 
-    String jcqrz, yzxg, type, ID, NAME, flag, error, GP, GD, GY, PL;
+    String jcqrz, yzxg, type, ID, NAME, flag, error, GP, GD, GY, PL,MAXSCZZ2,MINSCZZ2;
 
     TextView tvBLYY, tvPL, tvUserID, tvGP;
 
@@ -94,6 +95,8 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
         GP = getIntent().getStringExtra("GP");
         GY = getIntent().getStringExtra("GY");
         PL = getIntent().getStringExtra("PL");
+        MAXSCZZ2 = getIntent().getStringExtra("MAXSCZZ2");
+        MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
         tvUserID.setText(Constants.USERID);
         tvGP.setText(GP);
         tvPL.setText(PL);
@@ -164,6 +167,9 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
                 } else if (Double.parseDouble(etWGSL.getText().toString()) > Double.parseDouble(tvPL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入比批量小的完工数量！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(CJJSActivity.this, "实测值终必须在"+MINSCZZ2+"~"+MAXSCZZ2+"范围之类！", Toast.LENGTH_SHORT).show();
                 } else {
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

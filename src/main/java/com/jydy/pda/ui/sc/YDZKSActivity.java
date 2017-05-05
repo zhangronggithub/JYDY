@@ -34,6 +34,8 @@ import butterknife.Bind;
 import butterknife.OnClick;
 
 import static android.content.ContentValues.TAG;
+import static com.jydy.pda.R.id.etJDLLZ;
+import static com.jydy.pda.R.id.etYDLLZ;
 
 
 /**
@@ -42,7 +44,7 @@ import static android.content.ContentValues.TAG;
 
 public class YDZKSActivity extends BaseActivity {
 
-    String JDLLZ, YDLLZ, GD, GP, GY, LOTNO, PL, JCY, flag, error, type, ID, NAME;
+    String JDLLZ, YDLLZ, GD, GP, GY, LOTNO, PL, JCY, flag, error, type, ID, NAME,MAXSCZS,MINSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MAXLL,MINLL;
     @Bind(R.id.tvTitle)
     TextView tvTitle;
     @Bind(R.id.tvUserID)
@@ -108,6 +110,14 @@ public class YDZKSActivity extends BaseActivity {
         GY = getIntent().getStringExtra("GY");
         LOTNO = getIntent().getStringExtra("LOTNO");
         PL = getIntent().getStringExtra("PL");
+        MINSCZS = getIntent().getStringExtra("MINSCZS");
+        MAXSCZS = getIntent().getStringExtra("MAXSCZS");
+        MINYZDZJLL = getIntent().getStringExtra("MINYZDZJLL");
+        MAXYZDZJLL = getIntent().getStringExtra("MAXYZDZJLL");
+        MINYZDZYLL = getIntent().getStringExtra("MINYZDZYLL");
+        MAXYZDZYLL = getIntent().getStringExtra("MAXYZDZYLL");
+        MAXLL = getIntent().getStringExtra("MAXLL");
+        MINLL = getIntent().getStringExtra("MINLL");
         tvJDLLZ.setText(JDLLZ);
         tvYDLLZ.setText(YDLLZ);
         if (!JDLLZ.equals("")){
@@ -197,7 +207,19 @@ public class YDZKSActivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(YDZKSActivity.this, "拉力值必须在"+MINLL+"~"+MAXLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                } else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(YDZKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(tvJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(YDZKSActivity.this, "甲端拉力值必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(tvYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(tvYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(YDZKSActivity.this, "乙端拉力值必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                }else {
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
                 }
