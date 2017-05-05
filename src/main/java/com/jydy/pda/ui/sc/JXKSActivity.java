@@ -194,7 +194,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                     Toast.makeText(JXKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(JXKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JXKSActivity.this, "输入的实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
