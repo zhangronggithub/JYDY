@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.os.Build.VERSION_CODES.M;
+
 /**
  * Created by 23923 on 2017/2/7.
  */
@@ -48,7 +50,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
     String GD, GY, GP, PL, XZ, XJ, QXCD, QPCDJ, QPCDY, LOTNO, YZDZJ, YZDZY;//intent传过来的值
     String type, ID, NAME;//扫描模具条码，解析的三个字段。
     String PM, JCQRS;//喷码，检查确认
-    String flag, error;
+    String flag, error,MAXSCZS,MINSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL;
     TextView tvGD, tvGP, tvBB, tvSB, tvMJ, tvPL, tvPH, tvXZ, tvXJ, tvQXCD, tvQPCDJ, tvQPCDY, tvUserID;
     Spinner spDBSL;
     List<String> data_list;
@@ -116,6 +118,12 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         GD = getIntent().getStringExtra("GD");
         GY = getIntent().getStringExtra("GY");
         GP = getIntent().getStringExtra("GP");
+        MINSCZS = getIntent().getStringExtra("MINSCZS");
+        MAXSCZS = getIntent().getStringExtra("MAXSCZS");
+        MINYZDZJLL = getIntent().getStringExtra("MINYZDZJLL");
+        MAXYZDZJLL = getIntent().getStringExtra("MAXYZDZJLL");
+        MINYZDZYLL = getIntent().getStringExtra("MINYZDZYLL");
+        MAXYZDZYLL = getIntent().getStringExtra("MAXYZDZYLL");
         tvUserID.setText(Constants.USERID);
         tvGD.setText(GD);
         tvGP.setText(GP);
@@ -199,6 +207,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rb_jcqrs_bhg:
                 JCQRS = "N";
                 break;
+
             case R.id.btnSave:
                 if (TextUtils.isEmpty(tvBB.getText().toString())) {
                     SoundManager.playSound(2, 1);
@@ -218,6 +227,15 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 }else if (TextUtils.isEmpty(etYDLLZ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                    SoundManager.playSound(2, 1);
+                   Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                }else if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                 Thread mThread = new Thread(nextRunnable);
                 mThread.start();

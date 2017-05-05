@@ -49,6 +49,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private Dialog myWaitDialog;
 
+    private String MINSCZS,MAXSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL;
+
     @Override
     protected int getContentLayout() {
         return R.layout.activity_form_scan;
@@ -184,6 +186,12 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 YDLLZ = DecodeXml.decodeXml(str, "YZDZY");
                 JH = DecodeXml.decodeXml(str, "PM");
                 JXCS = DecodeXml.decodeXml(str, "JXCS");
+                MINSCZS = DecodeXml.decodeXml(str, "MINSCZS");
+                MAXSCZS = DecodeXml.decodeXml(str, "MAXSCZS");
+                MINYZDZJLL = DecodeXml.decodeXml(str, "MINYZDZJLL");
+                MAXYZDZJLL = DecodeXml.decodeXml(str, "MAXYZDZJLL");
+                MINYZDZYLL = DecodeXml.decodeXml(str, "MINYZDZYLL");
+                MAXYZDZYLL = DecodeXml.decodeXml(str, "MAXYZDZYLL");
 
 
                 if (flag.equals("S")) {
@@ -202,6 +210,12 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("QXCD", QXCD);
                             intent.putExtra("QPCDJ", QPCDJ);
                             intent.putExtra("QPCDY", QPCDY);
+                            intent.putExtra("MINSCZS", MINSCZS);
+                            intent.putExtra("MAXSCZS", MAXSCZS);
+                            intent.putExtra("MINYZDZJLL", MINYZDZJLL);
+                            intent.putExtra("MAXYZDZJLL", MAXYZDZJLL);
+                            intent.putExtra("MINYZDZYLL", MINYZDZYLL);
+                            intent.putExtra("MAXYZDZYLL", MAXYZDZYLL);
                             startActivity(intent);
                         } else if (GPZT.equals("2")) {
                             Intent intent = new Intent(FormScanActivity.this, CJJSActivity.class);
