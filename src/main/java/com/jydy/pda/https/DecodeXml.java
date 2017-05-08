@@ -1,5 +1,6 @@
 package com.jydy.pda.https;
 
+import android.content.ContentValues;
 import android.util.Xml;
 
 import com.jydy.pda.utils.Logs;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.view.View.Y;
 
 
 public class DecodeXml {
@@ -119,6 +122,11 @@ public class DecodeXml {
      * @param flag 分割的标识
      * @return
      */
+//    D/ContentValues: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; };
+// diffgram=anyType{NewDataSet=anyType{TAB_ZYLX=anyType{ZYLX001=50001; ZYLX002=作业类型01; ZYLX003=Y; ZYLX004=anyType{}; }; }; }; }
+//    TAB_ZYLX=anyType{ZYLX001=50001; ZYLX002=作业类型01; ZYLX003=Y; ZYLX004=anyType{};
+//    ZYLX001=50001; ZYLX002=作业类型01; ZYLX003=Y; ZYLX004=anyType{};
+    //4
     public static ArrayList<Map<String, Object>> decodeDataset(String str, String flag){
 
         Map<String, Object> mapOne = new HashMap<String, Object>();
@@ -129,11 +137,14 @@ public class DecodeXml {
         ArrayList<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
         while (m.find())
         {
+            Logs.d("DecodeDataset",m.group());
             String tmp=m.group().replace(flag+"=anyType{","");
+            Logs.d("DecodeDataset",tmp);
             String[] Strlen=tmp.split(";");
 
-            if(Strlen.length>1)
+            if(Strlen.length>0)
             {
+                Logs.d("DecodeDataset",Strlen.length);
                 mapOne = new HashMap<String, Object>(); //只要新建1个new map，就能预防值被覆盖的情况
                 for (int i = 0; i < Strlen.length; i++) {
                     if (Strlen[i].split("=").length>1) {
