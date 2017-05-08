@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 public class DecodeXml {
 
     String  TAG = getClass().getSimpleName();
-    String a = "1";
 
     /**
      * 用来解析没有重复标签的xml字符串
