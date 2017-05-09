@@ -14,10 +14,7 @@ import android.widget.TextView;
 import com.jydy.pda.R;
 import com.jydy.pda.main.FormScanActivity;
 import com.jydy.pda.ui.sc.FZKSActivity;
-import com.jydy.pda.ui.sc.XZLActivity;
-import com.jydy.pda.ui.sc.YDZJSActivity;
-import com.jydy.pda.ui.sc.YDZKSActivity;
-import com.jydy.pda.ui.sc.ZZLActivity;
+import com.jydy.pda.ui.sc.scrk.SCRKActivity;
 import com.jydy.pda.adapter.GvBaseAdapter;
 import com.jydy.pda.view.CustomDialog;
 import com.jydy.pda.view.LineGridView;
@@ -114,7 +111,7 @@ public class SCFragment extends Fragment  implements AdapterView.OnItemClickList
                 startActivity(i);
                 break;
             case 1:
-                Intent i1 = new Intent(getActivity(), YDZKSActivity.class);
+                Intent i1 = new Intent(getActivity(), SCRKActivity.class);
                 startActivity(i1);
 //                ShowDialog("1");
                 break;

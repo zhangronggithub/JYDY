@@ -60,6 +60,16 @@ public class Constants {
 	public static final String Get_DZMMethodName = "Get_DZM";//获取端子名信息
 	public static final String Save_JXMethodName = "Save_JX";//接线完工
 	public static final String Save_DJMethodName = "Save_DJ";//生产入库提交
+	public static final String CMSMQMethodName = "GetCMSMQ";//获取单别
+	public static final String CMSMCMethodName = "Get_CMSMC";//获取仓库
+	public static final String GetCMSMEMethodName = "GetCMSME";//获取部门
+	public static final String GetProductMethodName = "Get_Product";//获取产品信息
+	public static final String Save_SCAN_CommitMethodName = "Save_SCAN_Commit";//生产入库提交
+
+
+
+
+
 
 
 	// 获取地址
