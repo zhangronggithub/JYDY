@@ -80,6 +80,9 @@
         <activity
             android:name=".ui.sc.ZZLActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity
+            android:name=".ui.sc.SCRKActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
     </application>
 
 

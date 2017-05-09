@@ -59,6 +59,8 @@ public class Constants {
 	public static final String Get_FZLXMethodName = "Get_FZLX";//获取辅助类型信息
 	public static final String Get_DZMMethodName = "Get_DZM";//获取端子名信息
 	public static final String Save_JXMethodName = "Save_JX";//接线完工
+	public static final String Save_DJMethodName = "Save_DJ";//生产入库提交
+
 
 	// 获取地址
 	public static String getHttp() 
