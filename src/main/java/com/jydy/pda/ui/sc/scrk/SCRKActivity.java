@@ -1,5 +1,6 @@
 package com.jydy.pda.ui.sc.scrk;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -277,7 +278,7 @@ public class SCRKActivity extends BaseActivity {
                 startActivityForResult(i1, 2);
                 break;
             case R.id.ivBM:
-                Intent i2 = new Intent(SCRKActivity.this, CKActivity.class);
+                Intent i2 = new Intent(SCRKActivity.this, BMActivity.class);
                 i2.putExtra("type", "PD");
                 startActivityForResult(i2, 3);
                 break;

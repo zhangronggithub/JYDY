@@ -67,7 +67,6 @@
                 <TextView
                     android:id="@+id/tvDB1"
                     android:textSize="20dp"
-                    android:text="5801"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
@@ -79,7 +78,6 @@
                 <TextView
                     android:id="@+id/tvDB2"
                     android:textSize="20dp"
-                    android:text="组装入库"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -111,7 +109,6 @@
                 <TextView
                     android:id="@+id/tvCK1"
                     android:textSize="20dp"
-                    android:text="07"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
 
@@ -124,7 +121,6 @@
                 <TextView
                     android:id="@+id/tvCK2"
                     android:textSize="20dp"
-                    android:text="成品仓"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -240,7 +236,6 @@
                 <TextView
                     android:id="@+id/tvKWTM"
                     android:textSize="20dp"
-                    android:text="KWSP070001"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
@@ -332,7 +327,8 @@
                     android:textSize="20dp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:digits="1234567890"
+                    android:inputType="number"
+                    android:digits="0123456789."
                     android:layout_weight="1"
                     android:background="@null"/>
                 <TextView
@@ -379,7 +375,8 @@
                 <Button
                     android:id="@+id/btnSave"
                     style="@style/My_Button"
-                    android:text="保存" />
+                    android:text="保存"
+                    android:layout_marginRight="20dp"/>
                 <Button
                     android:id="@+id/btnCommit"
                     style="@style/My_Button"
