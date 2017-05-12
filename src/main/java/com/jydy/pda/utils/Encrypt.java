@@ -8,9 +8,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import static android.content.Context.TELEPHONY_SERVICE;
@@ -28,7 +32,7 @@ public class Encrypt {
      * @throws Exception
      */
     public static String aesEncrypt(String content, String encryptKey) throws Exception {
-        return base64Encode(aesEncryptToBytes(content, encryptKey));
+        return base64Encode(aesEncryptToBytes1(content, encryptKey));
     }
     /**
      * base 64 encode
@@ -70,7 +74,35 @@ public class Encrypt {
         return aesEncrypt(str, key).replace("=","");
     }
 
+    public static byte[] aesEncryptToBytes1(String content, String encryptKey) throws Exception {
+        int keyLength = 128;
+        int saltLength = 16;
+        byte[] salt;
 
+        // 先获取一个随机的盐值
+        // 你需要将此次生成的盐值保存到磁盘上下次再从字符串换算密钥时传入
+        // 如果盐值不一致将导致换算的密钥值不同
+        // 保存密钥的逻辑官方并没写，需要自行实现
+        SecureRandom random = new SecureRandom();
+        salt = new byte[saltLength];
+//        random.nextBytes(salt);
+
+        salt = "LPHOON08".getBytes();
+        // 将密码明文、盐值等使用新的方法换算密钥
+        int iterationCount = 1000;
+        KeySpec keySpec = new PBEKeySpec(encryptKey.toCharArray(), salt,
+                iterationCount, keyLength);
+        SecretKeyFactory keyFactory = SecretKeyFactory
+                .getInstance("PBKDF2WithHmacSHA1");
+        // 到这里你就能拿到一个安全的密钥了
+        byte[] keyBytes = keyFactory.generateSecret(keySpec).getEncoded();
+        SecretKey key = new SecretKeySpec(keyBytes, "AES");
+
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+
+        return cipher.doFinal(content.getBytes("utf-8"));
+    }
     private static class Base64
     {
 //        private  final char[] legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
