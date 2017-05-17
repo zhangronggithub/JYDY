@@ -97,6 +97,7 @@ public class FZJSActivity extends BaseActivity {
         tvPL.setText(PL);
         tvPH.setText(LOTNO);
         tvUserID.setText(Constants.USERID);
+        etWGSL.setText(PL);
     }
 
     @Override

@@ -34,6 +34,7 @@ import static android.content.ContentValues.TAG;
 import static android.os.Build.ID;
 import static com.jydy.pda.R.id.etJDLLZ;
 import static com.jydy.pda.R.id.etSCZS;
+import static com.jydy.pda.R.id.etWGSL;
 import static com.jydy.pda.R.id.etYDLLZ;
 import static com.jydy.pda.R.id.tvBB;
 import static com.jydy.pda.R.id.tvMJ;
@@ -105,7 +106,6 @@ public class JXJSActivity extends BaseActivity {
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvUserID.setText(Constants.USERID);
-
     }
 
     @Override
@@ -172,7 +172,7 @@ public class JXJSActivity extends BaseActivity {
                     Toast.makeText(JXJSActivity.this, "请输入压着数量！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(JXJSActivity.this, "实测值终必须在"+MINSCZZ2+"~"+MAXSCZZ2+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JXJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

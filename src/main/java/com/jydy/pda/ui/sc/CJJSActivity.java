@@ -98,6 +98,7 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
         MAXSCZZ2 = getIntent().getStringExtra("MAXSCZZ2");
         MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
         tvUserID.setText(Constants.USERID);
+        etWGSL.setText(PL);
         tvGP.setText(GP);
         tvPL.setText(PL);
 
@@ -169,7 +170,7 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
                     Toast.makeText(CJJSActivity.this, "请输入比批量小的完工数量！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJJSActivity.this, "实测值终必须在"+MINSCZZ2+"~"+MAXSCZZ2+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                 } else {
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

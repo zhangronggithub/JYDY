@@ -181,21 +181,21 @@
                         android:text="否" />
                 </RadioGroup>
                 <LinearLayout
+                    android:id="@+id/llPMLX"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <TextView
                         style="@style/My_Left_TextView"
-                        android:text="打把数量:" />
+                        android:text="喷码类型:" />
 
-                    <Spinner
-                        android:id="@+id/spDBSL"
+                    <TextView
+                        android:id="@+id/tvPMLX"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:paddingBottom="0dp"
-                        android:paddingTop="0dp"></Spinner>
+                        />
                 </LinearLayout>
             </LinearLayout>
             <ImageView
@@ -367,7 +367,23 @@
                         android:inputType="number"
                         android:digits="0123456789."
                         />
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/My_Left_TextView"
+                            android:text="打把数量:" />
 
+                        <Spinner
+                            android:id="@+id/spDBSL"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="0dp"
+                            android:paddingTop="0dp"></Spinner>
+                    </LinearLayout>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"

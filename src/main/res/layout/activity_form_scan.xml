@@ -43,7 +43,7 @@
         </RelativeLayout>
 
     <TextView
-        android:id="@+id/tvContent"
+        android:id="@+id/tvGYBH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -51,6 +51,7 @@
         android:textSize="15dp"
         android:textColor="@color/text"/>
         <LinearLayout
+            android:id="@+id/llGYBH"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -113,7 +114,6 @@
                 android:layout_weight="1"
                 android:hint="请扫描工票条码！"
                 android:gravity="center"
-                android:text="2116100010400025"
                 android:layout_height="30dp"
                 android:singleLine="true"
                 android:background="@null"/>

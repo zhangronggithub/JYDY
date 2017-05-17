@@ -103,6 +103,7 @@ public class YDZJSActivity extends BaseActivity {
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvPH.setText(LOTNO);
+        tvWGSL.setText(PL);
         tvUserID.setText(Constants.USERID);
         rbJcyHg.performClick();
         rbYzqrwgHg.performClick();

@@ -56,9 +56,11 @@ public class Constants {
 	public static final String Get_FJMethodName = "Get_FJ";//获取压端子附件信息
 	public static final String Get_ZYLXMethodName = "Get_ZYLX";//获取辅助作业类型信息
 	public static final String Get_JXLXMethodName = "Get_JXLX";//获取接线类型信息
+	public static final String Get_PMLBMethodName = "Get_PMLB";//获取喷码类型信息
 	public static final String Get_FZLXMethodName = "Get_FZLX";//获取辅助类型信息
 	public static final String Get_DZMMethodName = "Get_DZM";//获取端子名信息
 	public static final String Save_JXMethodName = "Save_JX";//接线完工
+	public static final String End_GPMethodName = "End_GP";//工票结束
 	public static final String Save_DJMethodName = "Save_DJ";//生产入库提交
 	public static final String CMSMQMethodName = "GetCMSMQ";//获取单别
 	public static final String CMSMCMethodName = "Get_CMSMC";//获取仓库

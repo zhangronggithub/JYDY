@@ -209,16 +209,16 @@ public class YDZKSActivity extends BaseActivity {
                     Toast.makeText(YDZKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "拉力值必须在"+MINLL+"~"+MAXLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 } else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(tvJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "甲端拉力值必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(tvYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(tvYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "乙端拉力值必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else {
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();

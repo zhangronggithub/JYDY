@@ -36,61 +36,84 @@
 
     <application android:allowBackup="true" android:icon="@drawable/jy"
         android:label="@string/app_name" android:supportsRtl="true" android:theme="@style/AppTheme">
-        <activity android:name=".main.LoginActivity">
+        <activity
+            android:name=".main.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity"></activity>
-        <activity android:name=".main.RegisterActivity"></activity>
-        <activity android:name=".main.ConfigActivity"></activity>
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".main.RegisterActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".main.ConfigActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".main.FormScanActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.CJKSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.CJJSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.YDZKSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.YDZJSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.FZKSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.FZJSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.JXKSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.JXJSActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.XZLActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.ZZLActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.scrk.SCRKActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.scrk.BMActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.scrk.CKActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity
             android:name=".ui.sc.scrk.DBActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
     </application>
 

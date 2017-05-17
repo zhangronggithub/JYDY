@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ import com.jydy.pda.utils.SoundManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.jydy.pda.R.id.tvContent;
+
 public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private String TAG = this.getClass().getSimpleName();
@@ -45,11 +48,13 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private String flag, error, GPZT, PL, XZ, XJ, QXCD, QPCDJ, QPCDY, LOTNO,JDLLZ,YDLLZ,JH,JXCS;
 
-    private TextView tvContent, tvGyName;
+    private TextView tvGYBH, tvGyName;
 
     private Dialog myWaitDialog;
 
     private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL;
+
+    private LinearLayout llGYBH;
 
     @Override
     protected int getContentLayout() {
@@ -60,7 +65,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
     protected void initView() {
         ivExit = (ImageView) findViewById(R.id.ivExit);
         btnNext = (Button) findViewById(R.id.btnNext);
-        tvContent = (TextView) findViewById(R.id.tvContent);
+        tvGYBH = (TextView) findViewById(R.id.tvGYBH);
+        llGYBH = (LinearLayout) findViewById(R.id.llGYBH);
         tvGyName = (TextView) findViewById(R.id.tvGyName);
         etGyForm = (EditText) findViewById(R.id.etGyForm);
         etGpForm = (EditText) findViewById(R.id.etGpForm);
@@ -75,6 +81,10 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void initData() {
         type = getIntent().getStringExtra("type");
+        if (type.equals("4")){
+            tvGYBH.setVisibility(View.GONE);
+            llGYBH.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -90,6 +100,16 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
             etGyForm.setText(GyID);
             tvGyName.setText(GyName);
         } else {
+            if (type.equals("4")){
+                try {
+                    GP = DecodeXml.decodeXml(tmStr, "GP");
+                    GD = DecodeXml.decodeXml(tmStr, "GD");
+                } catch (Exception e) {
+                    Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
+                }
+                etGpForm.setText(GP);
+                next();
+            }else{
             if (TextUtils.isEmpty(etGyForm.getText().toString())) {
                 SoundManager.playSound(2, 1);
                 Toast.makeText(FormScanActivity.this, "请先扫描工艺条码", Toast.LENGTH_SHORT).show();
@@ -102,6 +122,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 }
                 etGpForm.setText(GP);
                 next();
+            }
             }
         }
 
@@ -124,28 +145,38 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
     }
 
     private void next() {
-        if (TextUtils.isEmpty(etGyForm.getText().toString())) {
-            SoundManager.playSound(2, 1);
-            Toast.makeText(FormScanActivity.this, "请扫描工艺条码", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(etGpForm.getText().toString())||GD.equals("")) {
-            SoundManager.playSound(2, 1);
-            Toast.makeText(FormScanActivity.this, "请扫描工票条码", Toast.LENGTH_SHORT).show();
-        }
-        else if (!etGyForm.getText().toString().trim().equals("7001")&&!etGyForm.getText().toString().trim().equals("7010")&&!etGyForm.getText().toString().trim().equals("7020")&&!etGyForm.getText().toString().trim().equals("7030")) {
-            SoundManager.playSound(2, 1);
-            Toast.makeText(FormScanActivity.this, "请扫描正确的工艺条码", Toast.LENGTH_SHORT).show();
-        }
-        else {
-        myWaitDialog = MyWaitDialog.createLoadingDialog(FormScanActivity.this,"加载中，请稍后~");
-        myWaitDialog.show();
-            if (type.equals("0")) {
-                Thread mThread = new Thread(nextRunnable);
-                mThread.start();
+        if (type.equals("4")){
+            if (TextUtils.isEmpty(etGpForm.getText().toString()) || GD.equals("")) {
+                SoundManager.playSound(2, 1);
+                Toast.makeText(FormScanActivity.this, "请扫描工票条码", Toast.LENGTH_SHORT).show();
             } else {
-                Thread mThread = new Thread(JXWGRunnable);
+                myWaitDialog = MyWaitDialog.createLoadingDialog(FormScanActivity.this, "加载中，请稍后~");
+                myWaitDialog.show();
+                Thread mThread = new Thread(GPJSRunnable);
                 mThread.start();
             }
+        }else {
+            if (TextUtils.isEmpty(etGyForm.getText().toString())) {
+                SoundManager.playSound(2, 1);
+                Toast.makeText(FormScanActivity.this, "请扫描工艺条码", Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(etGpForm.getText().toString()) || GD.equals("")) {
+                SoundManager.playSound(2, 1);
+                Toast.makeText(FormScanActivity.this, "请扫描工票条码", Toast.LENGTH_SHORT).show();
+            } else if (!etGyForm.getText().toString().trim().equals("7001") && !etGyForm.getText().toString().trim().equals("7010") && !etGyForm.getText().toString().trim().equals("7020") && !etGyForm.getText().toString().trim().equals("7030")) {
+                SoundManager.playSound(2, 1);
+                Toast.makeText(FormScanActivity.this, "请扫描正确的工艺条码", Toast.LENGTH_SHORT).show();
+            } else {
+                myWaitDialog = MyWaitDialog.createLoadingDialog(FormScanActivity.this, "加载中，请稍后~");
+                myWaitDialog.show();
+                if (type.equals("0")) {
+                    Thread mThread = new Thread(nextRunnable);
+                    mThread.start();
+                } else {
+                    Thread mThread = new Thread(JXWGRunnable);
+                    mThread.start();
+                }
 
+            }
         }
     }
 
@@ -357,6 +388,45 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 error = DecodeXml.decodeXml(str, "ERROR");
                 if (flag.equals("S")) {
                     Toast.makeText(FormScanActivity.this, "接线完工！", Toast.LENGTH_SHORT).show();
+                } else {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(FormScanActivity.this, error, Toast.LENGTH_SHORT).show();
+
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                SoundManager.playSound(2, 1);
+                Toast.makeText(FormScanActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+            }
+            myWaitDialog.dismiss();
+            Looper.loop();
+        }
+    };
+    Runnable GPJSRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            Looper.prepare();
+            Map<String, String> params = new HashMap<String, String>();
+            String s_xlm_cs = "<?xml version=\"1.0\" encoding=\"GB2312\"?>";
+            s_xlm_cs = s_xlm_cs + "<ROOT>";
+            s_xlm_cs = s_xlm_cs + "<DETAIL>";
+            s_xlm_cs = s_xlm_cs + "<USERID>" + Constants.USERID + "</USERID>";
+            s_xlm_cs = s_xlm_cs + "<DATABASE>" + Constants.DATABASE + "</DATABASE>";
+            s_xlm_cs = s_xlm_cs + "<SN>" + Constants.SN + "</SN>";
+            s_xlm_cs = s_xlm_cs + "<GP>" + etGpForm.getText().toString() + "</GP>";
+            s_xlm_cs = s_xlm_cs + "</DETAIL>";
+            s_xlm_cs = s_xlm_cs + "</ROOT>";
+            params.put("s_xml_cs", s_xlm_cs);
+            Logs.d(TAG, s_xlm_cs);
+            try {
+                String str = CallWebService.CallWebService(Constants.End_GPMethodName, Constants.Namespace, params, Constants.getHttp());
+                Logs.d(TAG, str);
+                flag = DecodeXml.decodeXml(str, "FLAG");
+                error = DecodeXml.decodeXml(str, "ERROR");
+                if (flag.equals("S")) {
+                    Toast.makeText(FormScanActivity.this, "工票结束成功！", Toast.LENGTH_SHORT).show();
                 } else {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FormScanActivity.this, error, Toast.LENGTH_SHORT).show();

@@ -1,7 +1,9 @@
 package com.jydy.pda.ui.sc;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,7 +40,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.ContentValues.TAG;
 import static android.os.Build.VERSION_CODES.M;
+import static com.jydy.pda.R.id.tvJXLX;
+import static com.jydy.pda.R.id.tvPM;
 
 /**
  * Created by 23923 on 2017/2/7.
@@ -51,12 +57,15 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
     String type, ID, NAME;//扫描模具条码，解析的三个字段。
     String PM, JCQRS;//喷码，检查确认
     String flag, error,MAXSCZS,MINSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL;
-    TextView tvGD, tvGP, tvBB, tvSB, tvMJ, tvPL, tvPH, tvXZ, tvXJ, tvQXCD, tvQPCDJ, tvQPCDY, tvUserID;
+    TextView tvGD, tvGP, tvBB, tvSB, tvMJ, tvPL, tvPH, tvXZ, tvXJ, tvQXCD, tvQPCDJ, tvQPCDY, tvUserID,tvPMLX;
     Spinner spDBSL;
     List<String> data_list;
     ArrayAdapter<String> arr_adapter;
     RadioButton rb_jcqrs_hg, rb_jcqrs_bhg, rb_pm_Y, rb_pm_N;
     Button btnSave;
+    LinearLayout llPMLX;
+    String[] strPMLX;
+    boolean[] selectedPMLX;
 
     @Override
     protected int getContentLayout() {
@@ -65,7 +74,9 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initView() {
+        llPMLX = (LinearLayout) findViewById(R.id.llPMLX);
         tvUserID = (TextView) findViewById(R.id.tvUserID);
+        tvPMLX = (TextView) findViewById(R.id.tvPMLX);
         tvPL = (TextView) findViewById(R.id.tvPL);
         tvPH = (TextView) findViewById(R.id.tvPH);
         tvQXCD = (TextView) findViewById(R.id.tvQXCD);
@@ -88,10 +99,14 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         rb_jcqrs_bhg = (RadioButton) findViewById(R.id.rb_jcqrs_bhg);
         rb_pm_Y = (RadioButton) findViewById(R.id.rb_pm_Y);
         rb_pm_N = (RadioButton) findViewById(R.id.rb_pm_N);
+//获取喷码类型信息
+        Thread mThread1 = new Thread(getPMLXRunnable);
+        mThread1.start();
     }
 
     @Override
     protected void initAction() {
+        tvPMLX.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         rb_jcqrs_hg.setOnClickListener(this);
         rb_jcqrs_bhg.setOnClickListener(this);
@@ -197,9 +212,11 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.rb_pm_Y:
                 PM = "Y";
+                llPMLX.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_pm_N:
                 PM = "N";
+                llPMLX.setVisibility(View.GONE);
                 break;
             case R.id.rb_jcqrs_hg:
                 JCQRS = "Y";
@@ -221,31 +238,60 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 }else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(etJDLLZ.getText().toString())) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(etYDLLZ.getText().toString())) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
                     SoundManager.playSound(2, 1);
-                   Toast.makeText(CJKSActivity.this, "实测值始必须在"+MINSCZS+"~"+MAXSCZS+"范围之类！", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(CJKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "甲端拉力值必须在"+MINYZDZJLL+"~"+MAXYZDZJLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "乙端拉力值必须在"+MINYZDZYLL+"~"+MAXYZDZYLL+"范围之类！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
                 Thread mThread = new Thread(nextRunnable);
                 mThread.start();
                 }
                 break;
+            case R.id.tvPMLX:
+                showDialog("喷码类型",strPMLX,selectedPMLX,tvPMLX);
+                break;
             default:
                 break;
         }
     }
+    public void showDialog(final String strTitle,final String[] strFJ,final boolean[] selected,final TextView tv){
+        for(int i=0; i<selected.length; i++) {
+            if(selected[i] == true) {
+                selected[i] = false;
+            }
+        }
+        DialogInterface.OnMultiChoiceClickListener mutiListener =
+                new DialogInterface.OnMultiChoiceClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialogInterface,
+                                        int which, boolean isChecked) {
+                        selected[which] = isChecked;
+                    }
+                };
+        new  AlertDialog.Builder(this)
+                .setTitle(strTitle )
+                .setMultiChoiceItems(strFJ,  selected ,  mutiListener)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedStr = "";
+                        for(int i=0; i<selected.length; i++) {
+                            if(selected[i] == true) {
+                                selectedStr = selectedStr + strFJ[i]+";";
+                            }
+                        }
+                        tv.setText(selectedStr);
+                    }
+                })
+                .setNegativeButton("取消" ,  null )
+                .show();
+    }
     Runnable nextRunnable = new Runnable() {
 
         @Override
@@ -270,6 +316,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<XZ>" + tvXZ.getText().toString() + "</XZ>";
             s_xlm_cs = s_xlm_cs + "<XJ>" + tvXJ.getText().toString() + "</XJ>";
             s_xlm_cs = s_xlm_cs + "<QXCD>" + tvQXCD.getText().toString() + "</QXCD>";
+            s_xlm_cs = s_xlm_cs + "<PMLB>" + tvPMLX.getText().toString() + "</PMLB>";
             s_xlm_cs = s_xlm_cs + "<QPCDJ>" + tvQPCDJ.getText().toString() + "</QPCDJ>";
             s_xlm_cs = s_xlm_cs + "<QPCDY>" + tvQPCDY.getText().toString() + "</QPCDY>";
             s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
@@ -306,5 +353,41 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         }
     };
 
+    Runnable getPMLXRunnable = new Runnable() {
 
+        @Override
+        public void run() {
+            Looper.prepare();
+            Map<String, String> params = new HashMap<String, String>();
+            String s_xlm_cs = "<?xml version=\"1.0\" encoding=\"GB2312\"?>";
+            s_xlm_cs = s_xlm_cs + "<ROOT>";
+            s_xlm_cs = s_xlm_cs + "<DETAIL>";
+            s_xlm_cs = s_xlm_cs + "<USERID>" + Constants.USERID + "</USERID>";
+            s_xlm_cs = s_xlm_cs + "<DATABASE>" + Constants.DATABASE + "</DATABASE>";
+            s_xlm_cs = s_xlm_cs + "<SN>" + Constants.SN + "</SN>";
+            s_xlm_cs = s_xlm_cs + "</DETAIL>";
+            s_xlm_cs = s_xlm_cs + "</ROOT>";
+            params.put("s_xml_cs", s_xlm_cs);
+            Logs.d(TAG, s_xlm_cs);
+            try {
+                String str = CallWebService.CallWebService(Constants.Get_PMLBMethodName, Constants.Namespace, params, Constants.getHttp());
+                Logs.d(TAG, str);
+//                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
+                ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_PMLB");
+                Logs.d(TAG, list.get(0).get("PMLB002").toString());
+                strPMLX = new String[list.size()];
+                selectedPMLX = new boolean[list.size()];
+                for (int i = 0; i < list.size(); i++) {
+                    strPMLX[i] = list.get(i).get("PMLB002").toString();
+                    selectedPMLX[i] = false;
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                SoundManager.playSound(2, 1);
+                Toast.makeText(CJKSActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+            }
+            Looper.loop();
+        }
+    };
 }

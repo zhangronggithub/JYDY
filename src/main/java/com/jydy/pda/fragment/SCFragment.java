@@ -36,8 +36,8 @@ public class SCFragment extends Fragment  implements AdapterView.OnItemClickList
     private CustomDialog builder;
 
     // 图片封装为一个数组
-    private int[] icon = { R.drawable.caigou, R.drawable.caigou, R.drawable.caigou, R.drawable.caigou};
-    private String[] iconName = { "生产工艺", "生产入库" ,"进度查询","接线完工"};
+    private int[] icon = { R.drawable.caigou, R.drawable.caigou, R.drawable.caigou, R.drawable.caigou, R.drawable.caigou};
+    private String[] iconName = { "生产工艺", "生产入库" ,"进度查询","接线完工","工票结束"};
 
     @Nullable
     @Override
@@ -123,6 +123,11 @@ public class SCFragment extends Fragment  implements AdapterView.OnItemClickList
                 Intent i3 = new Intent(getActivity(),FormScanActivity.class);
                 i3.putExtra("type", "3");
                 startActivity(i3);
+                break;
+            case 4:
+                Intent i4 = new Intent(getActivity(),FormScanActivity.class);
+                i4.putExtra("type", "4");
+                startActivity(i4);
                 break;
             default:
                 break;
