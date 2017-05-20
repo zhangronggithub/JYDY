@@ -36,6 +36,8 @@ import butterknife.OnClick;
 import static android.content.ContentValues.TAG;
 import static com.jydy.pda.R.id.etJDLLZ;
 import static com.jydy.pda.R.id.etYDLLZ;
+import static com.jydy.pda.R.id.tvBB;
+import static com.jydy.pda.R.id.tvBLYY;
 
 
 /**
@@ -141,7 +143,11 @@ public class YDZKSActivity extends BaseActivity {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                tvTJY.setText(ID);
+                if(tvTJY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvTJY.setText(tvTJY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else if (type.equals("104")) {
                 tvMJ.setText(ID);
@@ -204,13 +210,13 @@ public class YDZKSActivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(tvYDLLZ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
+                } else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
-                } else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                } else if (!TextUtils.isEmpty(etSCZS.getText().toString())&(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else if (Float.parseFloat(tvJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
@@ -335,7 +341,6 @@ public class YDZKSActivity extends BaseActivity {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_FJ");
-                Logs.d(TAG, list.get(0).get("FJ002").toString());
                 strFJ = new String[list.size()];
                 selected = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {

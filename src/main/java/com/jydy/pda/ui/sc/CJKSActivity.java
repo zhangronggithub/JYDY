@@ -44,6 +44,7 @@ import static android.content.ContentValues.TAG;
 import static android.os.Build.VERSION_CODES.M;
 import static com.jydy.pda.R.id.tvJXLX;
 import static com.jydy.pda.R.id.tvPM;
+import static com.jydy.pda.R.id.tvTJY;
 
 /**
  * Created by 23923 on 2017/2/7.
@@ -169,8 +170,12 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             type = DecodeXml.decodeXml(tmStr, "C001");
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
-            if (type.equals("101")) {
-                tvBB.setText(ID);
+            if (type.equals("102")) {
+                if(tvBB.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else{
+                tvBB.setText(tvBB.getText().toString()+ID+";");
+                }
                 etTM.getText().clear();
             } else if (type.equals("103")) {
                 tvSB.setText(ID);
@@ -179,11 +184,11 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 tvMJ.setText(ID);
                 etTM.getText().clear();
             } else {
-                Toast.makeText(CJKSActivity.this, "请扫描班别、设备或模具条码！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CJKSActivity.this, "请扫描人员、设备或模具条码！", Toast.LENGTH_SHORT).show();
                 etTM.getText().clear();
             }
         } catch (Exception e) {
-            Toast.makeText(CJKSActivity.this, "请扫描班别、设备或模具条码！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CJKSActivity.this, "请扫描人员、设备或模具条码！", Toast.LENGTH_SHORT).show();
             etTM.getText().clear();
         }
     }
@@ -235,16 +240,19 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 }else if (TextUtils.isEmpty(tvMJ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请扫描模具！", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
+                }else if (TextUtils.isEmpty(tvPMLX.getText().toString())&PM.equals("Y")) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(CJKSActivity.this, "请选择喷码类型！", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                }else if (!TextUtils.isEmpty(etSCZS.getText().toString())&(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS))) {
                     SoundManager.playSound(2, 1);
                    Toast.makeText(CJKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)) {
+                }else if (!TextUtils.isEmpty(etJDLLZ.getText().toString())&(Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)) {
+                }else if (!TextUtils.isEmpty(etYDLLZ.getText().toString())&(Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
@@ -374,7 +382,6 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_PMLB");
-                Logs.d(TAG, list.get(0).get("PMLB002").toString());
                 strPMLX = new String[list.size()];
                 selectedPMLX = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {

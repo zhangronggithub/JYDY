@@ -305,7 +305,7 @@
 
                     <TextView
                         style="@style/My_Left_TextView2"
-                        android:text="班组:" />
+                        android:text="人员:" />
 
                     <TextView
                         android:id="@+id/tvBB"

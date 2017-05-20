@@ -139,6 +139,7 @@ public class LoginActivity extends Activity  implements View.OnClickListener{
 				String MB001 = DecodeXml.decodeXml(str,"MB001");
 				String MB002 = DecodeXml.decodeXml(str,"MB002");
 				Version = DecodeXml.decodeXml(str,"Version");
+				Constants.SCZTYPE = DecodeXml.decodeXml(str,"SCZTYPE");
 				if (FLAG.equals("S")){
 					String[] MB1 = MB001.split("\\|");
 					String[] MB2 = MB002.split("\\|");

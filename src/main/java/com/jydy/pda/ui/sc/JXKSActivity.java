@@ -35,6 +35,8 @@ import butterknife.OnClick;
 
 
 import static android.content.ContentValues.TAG;
+import static com.jydy.pda.R.id.tvBB;
+import static com.jydy.pda.R.id.tvBLYY;
 
 
 /**
@@ -128,7 +130,11 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                tvZYY.setText(ID);
+                if(tvZYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvZYY.setText(tvZYY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             }else if (type.equals("104")) {
                 tvMJ.setText(ID);
@@ -171,13 +177,13 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 xhjc = "N";
                 break;
             case R.id.tvJXLX:
-                showDialog("接线附件",strJXLX,selectedJXLX,tvJXLX);
+                    showDialog("接线附件", strJXLX, selectedJXLX, tvJXLX);
                 break;
             case R.id.tvFZLX:
-                showDialog("辅助附件",strFZLX,selectedFZLX,tvFZLX);
+                    showDialog("辅助附件", strFZLX, selectedFZLX, tvFZLX);
                 break;
             case R.id.tvDZM:
-                showDialog("端子名",strDZM,selectedDZM,tvDZM);
+                    showDialog("端子名", strDZM, selectedDZM, tvDZM);
                 break;
             case R.id.btnSave:
                 if (TextUtils.isEmpty(tvMJ.getText().toString())) {
@@ -189,10 +195,10 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 }else if (TextUtils.isEmpty(tvDZM.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请输入端子名！", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(etSCZS.getText().toString())) {
+                }else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)) {
+                }else if (!TextUtils.isEmpty(etSCZS.getText().toString())&(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else{
@@ -310,7 +316,6 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_JX");
-                Logs.d(TAG, list.get(0).get("JX002").toString());
                 strJXLX = new String[list.size()];
                 selectedJXLX = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {
@@ -347,7 +352,6 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_FZLX");
-                Logs.d(TAG, list.get(0).get("FZLX002").toString());
                 strFZLX = new String[list.size()];
                 selectedFZLX = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {
@@ -384,7 +388,6 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_DZMSD");
-                Logs.d(TAG, list.get(0).get("DZMSD002").toString());
                 strDZM = new String[list.size()];
                 selectedDZM = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {

@@ -32,6 +32,7 @@ import static android.R.attr.type;
 import static android.content.ContentValues.TAG;
 import static android.os.Build.ID;
 import static com.jydy.pda.R.id.etSCZS;
+import static com.jydy.pda.R.id.tvBB;
 import static com.jydy.pda.R.id.tvBLSL;
 import static com.jydy.pda.R.id.tvMJ;
 import static com.jydy.pda.R.id.tvWGSL;
@@ -108,7 +109,11 @@ public class FZJSActivity extends BaseActivity {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("109")) {
-                tvBLYY.setText(ID);
+                if(tvBLYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvBLYY.setText(tvBLYY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(FZJSActivity.this, "请扫描不良原因条码！", Toast.LENGTH_SHORT).show();
@@ -145,7 +150,7 @@ public class FZJSActivity extends BaseActivity {
                 jcyz = "N";
                 break;
             case R.id.btnSave:
-                if (TextUtils.isEmpty(tvBLYY.getText().toString())) {
+                if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(etBLSL.getText().toString())>0) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FZJSActivity.this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(etBLSL.getText().toString())) {

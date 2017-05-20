@@ -34,6 +34,7 @@ import static android.os.Build.ID;
 import static com.jydy.pda.R.id.etBLSL;
 import static com.jydy.pda.R.id.etSCZZ;
 import static com.jydy.pda.R.id.etWGSL;
+import static com.jydy.pda.R.id.tvBB;
 import static com.jydy.pda.R.id.tvMJ;
 import static com.jydy.pda.R.id.tvTJY;
 import static com.jydy.pda.R.raw.error;
@@ -118,7 +119,11 @@ public class YDZJSActivity extends BaseActivity {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("109")) {
-                tvBLYY.setText(ID);
+                if(tvBLYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvBLYY.setText(tvBLYY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(YDZJSActivity.this, "请扫描不良原因条码！", Toast.LENGTH_SHORT).show();

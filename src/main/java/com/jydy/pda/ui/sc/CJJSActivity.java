@@ -112,7 +112,11 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("109")) {
-                tvBLYY.setText(ID);
+                if(tvBLYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvBLYY.setText(tvBLYY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(CJJSActivity.this, "请扫描不良原因条码！", Toast.LENGTH_SHORT).show();
@@ -162,13 +166,13 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
                 } else if (TextUtils.isEmpty(etBLSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入不良数量！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(etSCZZ.getText().toString())) {
+                } else if (TextUtils.isEmpty(etSCZZ.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入实测值终！", Toast.LENGTH_SHORT).show();
                 } else if (Double.parseDouble(etWGSL.getText().toString()) > Double.parseDouble(tvPL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入比批量小的完工数量！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
+                }else if (!TextUtils.isEmpty(etSCZZ.getText().toString())&(Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                 } else {

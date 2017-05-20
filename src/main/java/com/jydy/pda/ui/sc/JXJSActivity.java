@@ -37,6 +37,7 @@ import static com.jydy.pda.R.id.etSCZS;
 import static com.jydy.pda.R.id.etWGSL;
 import static com.jydy.pda.R.id.etYDLLZ;
 import static com.jydy.pda.R.id.tvBB;
+import static com.jydy.pda.R.id.tvBLYY;
 import static com.jydy.pda.R.id.tvMJ;
 import static com.jydy.pda.R.id.tvPH;
 import static com.jydy.pda.R.id.tvQXCD;
@@ -116,7 +117,11 @@ public class JXJSActivity extends BaseActivity {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                tvJCY.setText(ID);
+                if(tvJCY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvJCY.setText(tvJCY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(JXJSActivity.this, "请扫描检查员条码！", Toast.LENGTH_SHORT).show();
@@ -164,13 +169,13 @@ public class JXJSActivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(etLL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "请输入拉力！", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(etSCZZ.getText().toString())) {
+                }else if (TextUtils.isEmpty(etSCZZ.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "请输入实测值终！", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(etYZSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "请输入压着数量！", Toast.LENGTH_SHORT).show();
-                }else if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)) {
+                }else if (!TextUtils.isEmpty(etSCZZ.getText().toString())&(Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2))) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                 }else{

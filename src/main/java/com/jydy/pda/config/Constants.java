@@ -45,6 +45,8 @@ public class Constants {
 	public static String TPTMCD="15";
 	//保存权限后台数据
 	public static ArrayList<PowerListBean> powerList = new ArrayList<>() ;
+	//对实测值的输入的控制，Y表示必须输入，N表示可以不输入
+	public static String SCZTYPE = "Y";
 
 	public static String APKFILE= Environment.getExternalStorageDirectory()+"/jydy.apk";//apk保存地址
 	//方法名称

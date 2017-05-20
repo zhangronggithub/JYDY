@@ -35,6 +35,8 @@ import butterknife.OnClick;
 
 import static android.R.attr.type;
 import static android.content.ContentValues.TAG;
+import static com.jydy.pda.R.id.tvBB;
+import static com.jydy.pda.R.id.tvBLYY;
 
 
 /**
@@ -113,7 +115,11 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                tvZYZ.setText(ID);
+                if(tvZYZ.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvZYZ.setText(tvZYZ.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(FZKSActivity.this, "请扫描作业员条码！", Toast.LENGTH_SHORT).show();
@@ -274,7 +280,6 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
                 Logs.d(TAG, str);
 //                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
                 ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_ZYLX");
-                Logs.d(TAG, list.get(0).get("ZYLX002").toString());
                 strZYLX = new String[list.size()];
                 selected = new boolean[list.size()];
                 for (int i = 0; i < list.size(); i++) {
