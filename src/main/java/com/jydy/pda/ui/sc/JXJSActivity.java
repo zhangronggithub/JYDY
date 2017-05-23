@@ -214,6 +214,7 @@ public class JXJSActivity extends BaseActivity {
             s_xlm_cs = s_xlm_cs + "<LL>" + etLL.getText().toString() + "</LL>";
             s_xlm_cs = s_xlm_cs + "<SCZZ>" + etSCZZ.getText().toString() + "</SCZZ>";
             s_xlm_cs = s_xlm_cs + "<YZCSQTY>" + etYZSL.getText().toString() + "</YZCSQTY>";
+            s_xlm_cs = s_xlm_cs + "<JCYZ>" + tvJCY.getText().toString() + "</JCYZ>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
             s_xlm_cs = s_xlm_cs + "</ROOT>";
             params.put("s_xml_cs", s_xlm_cs);

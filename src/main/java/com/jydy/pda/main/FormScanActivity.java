@@ -294,10 +294,11 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             Toast.makeText(FormScanActivity.this, "此工票已完工！", Toast.LENGTH_SHORT).show();
                         }
                     } else if (etGyForm.getText().toString().equals("7020")) {
-                        if (JXCS.equals("N")){
-                            Toast.makeText(FormScanActivity.this, "此工单工艺扫描已超过两次！", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
+//                        if (JXCS.equals("N")){
+//                            myWaitDialog.dismiss();
+//                            Toast.makeText(FormScanActivity.this, "此工单工艺扫描已超过两次！", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
                         if (GPZT.equals("1")) {
                             Intent intent = new Intent(FormScanActivity.this, JXKSActivity.class);
                             intent.putExtra("GD", GD);
