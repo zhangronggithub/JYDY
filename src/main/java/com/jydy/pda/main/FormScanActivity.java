@@ -213,8 +213,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 QPCDJ = DecodeXml.decodeXml(str, "QPCDJ");
                 QPCDY = DecodeXml.decodeXml(str, "QPCDY");
                 LOTNO = DecodeXml.decodeXml(str, "LOTNO");
-                JDLLZ = DecodeXml.decodeXml(str, "YZDZJ");
-                YDLLZ = DecodeXml.decodeXml(str, "YZDZY");
+                JDLLZ = DecodeXml.decodeXml(str, "YZDZJ")+"";
+                YDLLZ = DecodeXml.decodeXml(str, "YZDZY")+"";
                 JH = DecodeXml.decodeXml(str, "PM");
                 JXCS = DecodeXml.decodeXml(str, "JXCS");
                 MINSCZS = DecodeXml.decodeXml(str, "MINSCZS");

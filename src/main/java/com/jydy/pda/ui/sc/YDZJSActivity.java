@@ -172,6 +172,9 @@ public class YDZJSActivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(tvBLSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZJSActivity.this, "请输入不良数量！", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(tvBLSL.getText().toString())>0) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(etYZCSSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZJSActivity.this, "请输入压着次数数量！", Toast.LENGTH_SHORT).show();

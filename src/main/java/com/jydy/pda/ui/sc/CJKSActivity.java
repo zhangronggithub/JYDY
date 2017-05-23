@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -233,32 +234,50 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btnSave:
                 if (TextUtils.isEmpty(tvBB.getText().toString())) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "请扫描班组！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CJKSActivity.this, "请扫描人员！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (TextUtils.isEmpty(tvSB.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请扫描设备！", Toast.LENGTH_SHORT).show();
+                    return;
                 }else if (TextUtils.isEmpty(tvMJ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请扫描模具！", Toast.LENGTH_SHORT).show();
+                    return;
                 }else if (TextUtils.isEmpty(tvPMLX.getText().toString())&PM.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请选择喷码类型！", Toast.LENGTH_SHORT).show();
+                    return;
                 }else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                }else if (!TextUtils.isEmpty(etSCZS.getText().toString())&(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS))) {
-                    SoundManager.playSound(2, 1);
-                   Toast.makeText(CJKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else if (!TextUtils.isEmpty(etJDLLZ.getText().toString())&(Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL))) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else if (!TextUtils.isEmpty(etYDLLZ.getText().toString())&(Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL))) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else{
+                    return;
+                }
+                if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
+                    if (Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)){
+                        SoundManager.playSound(2, 1);
+                        Toast.makeText(CJKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                 if (!TextUtils.isEmpty(etJDLLZ.getText().toString())) {
+                    if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
+                        SoundManager.playSound(2, 1);
+                        Toast.makeText(CJKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                 if (!TextUtils.isEmpty(etYDLLZ.getText().toString())) {
+                   if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
+                       SoundManager.playSound(2, 1);
+                       Toast.makeText(CJKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
+                       return;
+                   }
+                }
+
                 Thread mThread = new Thread(nextRunnable);
                 mThread.start();
-                }
+
                 break;
             case R.id.tvPMLX:
                 showDialog("喷码类型",strPMLX,selectedPMLX,tvPMLX);
@@ -317,7 +336,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<GY>" + GY + "</GY>";
             s_xlm_cs = s_xlm_cs + "<GP>" + GP + "</GP>";
             s_xlm_cs = s_xlm_cs + "<GD>" + GD + "</GD>";
-            s_xlm_cs = s_xlm_cs + "<BB>" + tvBB.getText().toString() + "</BB>";
+            s_xlm_cs = s_xlm_cs + "<YG>" + tvBB.getText().toString() + "</YG>";
             s_xlm_cs = s_xlm_cs + "<SBJXBH>" + tvSB.getText().toString() + "</SBJXBH>";
             s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";

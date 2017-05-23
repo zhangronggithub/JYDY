@@ -150,12 +150,12 @@ public class FZJSActivity extends BaseActivity {
                 jcyz = "N";
                 break;
             case R.id.btnSave:
-                if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(etBLSL.getText().toString())>0) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(FZJSActivity.this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(etBLSL.getText().toString())) {
+                if (TextUtils.isEmpty(etBLSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FZJSActivity.this, "请输入不良数量！", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(etBLSL.getText().toString())>0) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(FZJSActivity.this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(etWGSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FZJSActivity.this, "请输入完工数量！", Toast.LENGTH_SHORT).show();

@@ -163,22 +163,34 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
                 if (TextUtils.isEmpty(etWGSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入完工数量！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (TextUtils.isEmpty(etBLSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入不良数量！", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(etBLSL.getText().toString())>0) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(CJJSActivity.this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (TextUtils.isEmpty(etSCZZ.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入实测值终！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (Double.parseDouble(etWGSL.getText().toString()) > Double.parseDouble(tvPL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJJSActivity.this, "请输入比批量小的完工数量！", Toast.LENGTH_SHORT).show();
-                }else if (!TextUtils.isEmpty(etSCZZ.getText().toString())&(Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2))) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
-                } else {
+                    return;
+                }
+                if (!TextUtils.isEmpty(etSCZZ.getText().toString())) {
+                    if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)){
+                        SoundManager.playSound(2, 1);
+                        Toast.makeText(CJJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
-                }
+
                 break;
             default:
                 break;

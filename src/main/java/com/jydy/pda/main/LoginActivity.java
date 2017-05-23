@@ -1,6 +1,7 @@
 package com.jydy.pda.main;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -20,6 +22,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -40,6 +43,12 @@ import com.jydy.pda.utils.SoundManager;
 import com.jydy.pda.view.DropEditText;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -269,113 +278,113 @@ public class LoginActivity extends Activity  implements View.OnClickListener{
 				}
 		);
 	}
-//	/**
-//	 * 是否更新提示窗口
-//	 */
-//	private void showNoticeDialog() {
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setTitle("软件更新");
-//		builder.setMessage("检测到新版本，是否更新？");
-//		builder.setPositiveButton("更新",
+	/**
+	 * 是否更新提示窗口
+	 */
+	private void showNoticeDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("软件更新");
+		builder.setMessage("检测到新版本，是否更新？");
+		builder.setPositiveButton("更新",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						showDownloadDialog();
+					}
+				});
+
+		builder.setNegativeButton("取消",
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						finish();
+					}
+				});
+		Dialog noticeDialog = builder.create();
+		noticeDialog.show();
+		noticeDialog.setOnKeyListener(new DialogOnKeyListener());
+	}
+
+	/**
+	 * 下载等待窗口
+	 */
+	private void showDownloadDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("正在更新");
+		final LayoutInflater inflater = LayoutInflater.from(this);
+		View v = inflater.inflate(R.layout.softupdate_progress, null);
+		mProgress = (ProgressBar) v.findViewById(R.id.update_progress);
+		tvProgress = (TextView) v.findViewById(R.id.tvProgress);
+		builder.setView(v);
+//		builder.setNegativeButton("取消下载",
 //				new DialogInterface.OnClickListener() {
 //					@Override
 //					public void onClick(DialogInterface dialog, int which) {
 //						dialog.dismiss();
-//						showDownloadDialog();
+//						cancelUpdate = true;
 //					}
 //				});
+		mDownloadDialog = builder.create();
+		mDownloadDialog.show();
+		downloadApk();
+	}
+
+	private void downloadApk() {
+		new downloadApkThread().start();
+	}
+
+
+	/**
+	 * 下载程序
+	 */
+	private class downloadApkThread extends Thread {
+		@Override
+		public void run() {
+			try {
+				if (Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
+					Logs.d("DDFDF",Constants.APKURL());
+					URL url = new URL(Constants.APKURL());
+					HttpURLConnection conn = (HttpURLConnection) url
+							.openConnection();
+					conn.connect();
+					int length = conn.getContentLength();
+					InputStream is = conn.getInputStream();
 //
-//		builder.setNegativeButton("取消",
-//				new DialogInterface.OnClickListener() {
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						dialog.dismiss();
-//						finish();
+//					File file = new File(Constants.APKFILE);
+//					if (!file.exists()) {
+//						file.mkdir();
 //					}
-//				});
-//		Dialog noticeDialog = builder.create();
-//		noticeDialog.show();
-//		noticeDialog.setOnKeyListener(new DialogOnKeyListener());
-//	}
-//
-//	/**
-//	 * 下载等待窗口
-//	 */
-//	private void showDownloadDialog() {
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//		builder.setTitle("正在更新");
-//		final LayoutInflater inflater = LayoutInflater.from(this);
-//		View v = inflater.inflate(R.layout.softupdate_progress, null);
-//		mProgress = (ProgressBar) v.findViewById(R.id.update_progress);
-//		tvProgress = (TextView) v.findViewById(R.id.tvProgress);
-//		builder.setView(v);
-////		builder.setNegativeButton("取消下载",
-////				new DialogInterface.OnClickListener() {
-////					@Override
-////					public void onClick(DialogInterface dialog, int which) {
-////						dialog.dismiss();
-////						cancelUpdate = true;
-////					}
-////				});
-//		mDownloadDialog = builder.create();
-//		mDownloadDialog.show();
-//		downloadApk();
-//	}
-//
-//	private void downloadApk() {
-//		new downloadApkThread().start();
-//	}
-//
-//
-//	/**
-//	 * 下载程序
-//	 */
-//	private class downloadApkThread extends Thread {
-//		@Override
-//		public void run() {
-//			try {
-//				if (Environment.getExternalStorageState().equals(
-//						Environment.MEDIA_MOUNTED)) {
-//					Logs.d("DDFDF",Constants.APKURL());
-//					URL url = new URL(Constants.APKURL());
-//					HttpURLConnection conn = (HttpURLConnection) url
-//							.openConnection();
-//					conn.connect();
-//					int length = conn.getContentLength();
-//					InputStream is = conn.getInputStream();
-////
-////					File file = new File(Constants.APKFILE);
-////					if (!file.exists()) {
-////						file.mkdir();
-////					}
-//					File apkFile = new File(Constants.APKFILE);
-//					FileOutputStream fos = new FileOutputStream(apkFile);
-//					int count = 0;
-//					byte buf[] = new byte[1024];
-//					do {
-//						int numread = is.read(buf);
-//						count += numread;
-//						 progress1 = (int) (((float) count / length) * 100);
-//						mHandler.sendEmptyMessage(0);
-//						if (numread <= 0) {
-//							mHandler.sendEmptyMessage(1);
-//							break;
-//						}
-//
-//						fos.write(buf, 0, numread);
-//					} while (true);
-//					fos.close();
-//					is.close();
-//				}
-//			} catch (MalformedURLException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//			mDownloadDialog.dismiss();
-//		}
-//	};
+					File apkFile = new File(Constants.APKFILE);
+					FileOutputStream fos = new FileOutputStream(apkFile);
+					int count = 0;
+					byte buf[] = new byte[1024];
+					do {
+						int numread = is.read(buf);
+						count += numread;
+						 progress1 = (int) (((float) count / length) * 100);
+						mHandler.sendEmptyMessage(0);
+						if (numread <= 0) {
+							mHandler.sendEmptyMessage(1);
+							break;
+						}
+
+						fos.write(buf, 0, numread);
+					} while (true);
+					fos.close();
+					is.close();
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			mDownloadDialog.dismiss();
+		}
+	};
 
 	/**
 	 * 安装apk
@@ -402,7 +411,7 @@ public class LoginActivity extends Activity  implements View.OnClickListener{
 						String version = packInfo.versionName;
 						Logs.d(TAG,Version+"JJJJJ");
 						if (Float.parseFloat(Version)>Float.parseFloat(version)){
-//							showNoticeDialog();
+							showNoticeDialog();
 						}
 					}catch (Exception e) {
 						// TODO Auto-generated catch block

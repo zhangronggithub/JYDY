@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.jydy.pda.R;
 import com.jydy.pda.main.FormScanActivity;
 import com.jydy.pda.ui.sc.FZKSActivity;
+import com.jydy.pda.ui.sc.JXKSActivity;
+import com.jydy.pda.ui.sc.YDZKSActivity;
 import com.jydy.pda.ui.sc.scrk.SCRKActivity;
 import com.jydy.pda.adapter.GvBaseAdapter;
 import com.jydy.pda.view.CustomDialog;

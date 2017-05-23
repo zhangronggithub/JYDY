@@ -85,7 +85,7 @@ public class Constants {
 	// 获取下载apk地址
 	public static String APKURL()
 	{
-		return HTTP_ROOT + HTTP_IP + "/barcode/webservice/Sears/download/WarehouseM.zip";
+		return HTTP_ROOT + HTTP_IP + "/barcode/webservice/Sears/download/JYDY.zip";
 	}
 
 	//控制按钮的重复点击

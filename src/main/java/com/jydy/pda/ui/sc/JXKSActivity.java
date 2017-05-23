@@ -189,22 +189,30 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                 if (TextUtils.isEmpty(tvMJ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请扫描模具！", Toast.LENGTH_SHORT).show();
+                    return;
                 } else if (TextUtils.isEmpty(tvZYY.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请扫描作业员！", Toast.LENGTH_SHORT).show();
+                    return;
                 }else if (TextUtils.isEmpty(tvDZM.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请输入端子名！", Toast.LENGTH_SHORT).show();
+                    return;
                 }else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                }else if (!TextUtils.isEmpty(etSCZS.getText().toString())&(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS))) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(JXKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
-                }else{
+                    return;
+                }
+                if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
+                    if (Float.parseFloat(etSCZS.getText().toString().trim()) > Float.parseFloat(MAXSCZS) || Float.parseFloat(etSCZS.getText().toString().trim()) < Float.parseFloat(MINSCZS)) {
+                        SoundManager.playSound(2, 1);
+                        Toast.makeText(JXKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
-                }
+
                 break;
         }
     }
