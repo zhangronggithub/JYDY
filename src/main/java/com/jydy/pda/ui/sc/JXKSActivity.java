@@ -130,11 +130,11 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                if(tvZYY.getText().toString().contains(ID)){
-                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
-                }else {
-                    tvZYY.setText(tvZYY.getText().toString() + ID + ";");
-                }
+//                if(tvZYY.getText().toString().contains(ID)){
+//                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+//                }else {
+                    tvZYY.setText(ID );
+//                }
                 etTM.getText().clear();
             }else if (type.equals("104")) {
                 tvMJ.setText(ID);
@@ -270,7 +270,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<LOTNO>" + tvPH.getText().toString() + "</LOTNO>";
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";
             s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
-            s_xlm_cs = s_xlm_cs + "<TJY>" + tvZYY.getText().toString() + "</TJY>";
+            s_xlm_cs = s_xlm_cs + "<ZYZ>" + tvZYY.getText().toString() + "</ZYZ>";
             s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
             s_xlm_cs = s_xlm_cs + "<XHJC>" + xhjc + "</XHJC>";
             s_xlm_cs = s_xlm_cs + "<JXLX>" + tvJXLX.getText().toString() + "</JXLX>";

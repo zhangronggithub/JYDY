@@ -84,6 +84,10 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
         if (type.equals("4")){
             tvGYBH.setVisibility(View.GONE);
             llGYBH.setVisibility(View.GONE);
+            btnNext.setText("结束");
+        }
+        if(type.equals("3")){
+            btnNext.setText("完工");
         }
     }
 

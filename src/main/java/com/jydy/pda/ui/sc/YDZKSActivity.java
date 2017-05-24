@@ -215,11 +215,11 @@ public class YDZKSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入拉力值！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (TextUtils.isEmpty(tvJDFJ.getText().toString())) {
+                } else if (TextUtils.isEmpty(tvJDFJ.getText().toString())&JDLLZ==null) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入甲端附件！", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (TextUtils.isEmpty(tvYDFJ.getText().toString())) {
+                }else if (TextUtils.isEmpty(tvYDFJ.getText().toString())&YDLLZ==null) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入乙端附件！", Toast.LENGTH_SHORT).show();
                     return;
@@ -328,7 +328,7 @@ public class YDZKSActivity extends BaseActivity {
             s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
             s_xlm_cs = s_xlm_cs + "<YZDZJ>" + tvJDLLZ.getText().toString() + "</YZDZJ>";
             s_xlm_cs = s_xlm_cs + "<YZDZY>" + tvYDLLZ.getText().toString() + "</YZDZY>";
-            s_xlm_cs = s_xlm_cs + "<JCYLLS>" + JCY + "</JCYLLS>";
+            s_xlm_cs = s_xlm_cs + "<YZQRWG>" + JCY + "</YZQRWG>";
             s_xlm_cs = s_xlm_cs + "<LL>" + etLL.getText().toString() + "</LL>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
             s_xlm_cs = s_xlm_cs + "</ROOT>";
