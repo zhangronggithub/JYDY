@@ -122,11 +122,19 @@ public class YDZKSActivity extends BaseActivity {
         MINLL = getIntent().getStringExtra("MINLL");
         tvJDLLZ.setText(JDLLZ);
         tvYDLLZ.setText(YDLLZ);
-        if (!JDLLZ.equals("")){
+        if (JDLLZ==null){
+            tvJDLLZ.setEnabled(true);
+            tvJDFJ.setEnabled(true);
+        }else{
             tvJDLLZ.setEnabled(false);
+            tvJDFJ.setEnabled(false);
         }
-        if (!YDLLZ.equals("")){
+        if (YDLLZ==null){
+            tvYDLLZ.setEnabled(true);
+            tvYDFJ.setEnabled(true);
+        }else{
             tvYDLLZ.setEnabled(false);
+            tvYDFJ.setEnabled(false);
         }
         tvGP.setText(GP);
         tvPL.setText(PL);
@@ -227,7 +235,8 @@ public class YDZKSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
+                }
+                if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                     return;
