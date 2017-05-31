@@ -35,8 +35,7 @@ import butterknife.OnClick;
 
 import static android.R.attr.type;
 import static android.content.ContentValues.TAG;
-import static com.jydy.pda.R.id.tvBB;
-import static com.jydy.pda.R.id.tvBLYY;
+
 
 
 /**
@@ -59,8 +58,10 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
     EditText etTM;
     @Bind(R.id.tvZYZ)
     TextView tvZYZ;
-    @Bind(R.id.tvZYLX)
-    TextView tvZYLX;
+    @Bind(R.id.tvJDZYLX)
+    TextView tvJDZYLX;
+    @Bind(R.id.tvYDZYLX)
+    TextView tvYDZYLX;
     @Bind(R.id.rb_jcqrs_hg)
     RadioButton rbJcqrsHg;
     @Bind(R.id.rb_jcqrs_bhg)
@@ -151,7 +152,7 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
     };
 
 
-    @OnClick({R.id.rb_jcqrs_hg, R.id.rb_jcqrs_bhg, R.id.btnSave, R.id.tvZYLX})
+    @OnClick({R.id.rb_jcqrs_hg, R.id.rb_jcqrs_bhg, R.id.btnSave, R.id.tvJDZYLX, R.id.tvYDZYLX})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rb_jcqrs_hg:
@@ -160,16 +161,22 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rb_jcqrs_bhg:
                 jcqrs = "N";
                 break;
-            case R.id.tvZYLX:
-                showDialog("作业类型",strZYLX,selected,tvZYLX);
+            case R.id.tvJDZYLX:
+                showDialog("甲端作业类型",strZYLX,selected,tvJDZYLX);
+                break;
+            case R.id.tvYDZYLX:
+                showDialog("乙端作业类型",strZYLX,selected,tvYDZYLX);
                 break;
             case R.id.btnSave:
                 if (TextUtils.isEmpty(tvZYZ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FZKSActivity.this, "请扫描作业者！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(tvZYLX.getText().toString())) {
+                } else if (TextUtils.isEmpty(tvJDZYLX.getText().toString())) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(FZKSActivity.this, "请选择作业类型！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FZKSActivity.this, "请选择甲端作业类型！", Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(tvYDZYLX.getText().toString())) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(FZKSActivity.this, "请选择乙端作业类型！", Toast.LENGTH_SHORT).show();
                 }else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
@@ -229,7 +236,8 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<GD>" + GD + "</GD>";
             s_xlm_cs = s_xlm_cs + "<LOTNO>" + tvPH.getText().toString() + "</LOTNO>";
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";
-            s_xlm_cs = s_xlm_cs + "<ZYLX>" + tvZYLX.getText().toString() + "</ZYLX>";
+            s_xlm_cs = s_xlm_cs + "<ZYLX>" + tvJDZYLX.getText().toString() + "</ZYLX>";
+            s_xlm_cs = s_xlm_cs + "<YDZYLX>" + tvYDZYLX.getText().toString() + "</YDZYLX>";
             s_xlm_cs = s_xlm_cs + "<ZYZ>" + tvZYZ.getText().toString() + "</ZYZ>";
             s_xlm_cs = s_xlm_cs + "<JCYS>" + jcqrs + "</JCYS>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";

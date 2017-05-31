@@ -202,7 +202,7 @@
 
                     <TextView
                         style="@style/My_Left_TextView"
-                        android:text="实测值终:" />
+                        android:text="线长实测终:" />
 
                     <EditText
                         android:id="@+id/etSCZZ"

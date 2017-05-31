@@ -22,6 +22,7 @@ import com.jydy.pda.https.DecodeXml;
 import com.jydy.pda.main.BaseActivity;
 import com.jydy.pda.utils.Logs;
 import com.jydy.pda.utils.SoundManager;
+import com.jydy.pda.view.CustomDialog1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,6 +66,8 @@ public class YDZKSActivity extends BaseActivity {
     TextView tvTJY;
     @Bind(R.id.tvMJ)
     TextView tvMJ;
+    @Bind(R.id.tvYDMJ)
+    TextView tvYDMJ;
     @Bind(R.id.etLL)
     EditText etLL;
     @Bind(R.id.tvJDFJ)
@@ -86,6 +89,7 @@ public class YDZKSActivity extends BaseActivity {
 
     String[] strFJ ;
     boolean[] selected ;
+    CustomDialog1 builder;
     @Override
     protected int getContentLayout() {
         return R.layout.activity_ydzks;
@@ -158,8 +162,44 @@ public class YDZKSActivity extends BaseActivity {
                 }
                 etTM.getText().clear();
             } else if (type.equals("104")) {
-                tvMJ.setText(ID);
-                etTM.getText().clear();
+                builder = new CustomDialog1(this,
+                        R.style.customdialog);
+                String str1 = "请选择甲端模具或乙端模具！";
+                builder.setmessage(str1);
+                builder.setpositiveButton("甲端", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (JDLLZ==null){
+                            tvMJ.setText(ID);
+                            etTM.getText().clear();
+                            builder.dismiss();
+                        }else{
+                            etTM.getText().clear();
+                            builder.dismiss();
+                            Toast.makeText(YDZKSActivity.this, "不需要扫描甲端模具！", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+                builder.setnegativeButton("乙端", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (YDLLZ==null){
+                            tvYDMJ.setText(ID);
+                            etTM.getText().clear();
+                            builder.dismiss();
+                        }else{
+                            etTM.getText().clear();
+                            builder.dismiss();
+                            Toast.makeText(YDZKSActivity.this, "不需要扫描乙端模具！", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+                builder.setCancelable(true);
+                builder.show();
             } else {
                 Toast.makeText(YDZKSActivity.this, "请扫描调机员或模具条码！", Toast.LENGTH_SHORT).show();
                 etTM.getText().clear();
@@ -207,13 +247,13 @@ public class YDZKSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请扫调机员！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (TextUtils.isEmpty(tvMJ.getText().toString())) {
+                } else if (TextUtils.isEmpty(tvMJ.getText().toString())&JDLLZ==null) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "请扫描模具！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (TextUtils.isEmpty(etLL.getText().toString())) {
+                }else if (TextUtils.isEmpty(tvYDMJ.getText().toString())&YDLLZ==null) {
                     SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "请输入拉力值！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YDZKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (TextUtils.isEmpty(tvJDFJ.getText().toString())&JDLLZ==null) {
                     SoundManager.playSound(2, 1);
@@ -231,12 +271,8 @@ public class YDZKSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (TextUtils.isEmpty(etSCZS.getText().toString())&Constants.SCZTYPE.equals("Y")) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "请输入实测值始！", Toast.LENGTH_SHORT).show();
-                    return;
                 }
-                if (Float.parseFloat(etLL.getText().toString().trim())>Float.parseFloat(MAXLL)||Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
+                if (Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                     return;
@@ -249,14 +285,14 @@ public class YDZKSActivity extends BaseActivity {
                     }
                 }
                 if (!TextUtils.isEmpty(tvJDLLZ.getText().toString())) {
-                    if (Float.parseFloat(tvJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
+                    if (Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
                         SoundManager.playSound(2, 1);
                         Toast.makeText(YDZKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
                 if (!TextUtils.isEmpty(tvYDLLZ.getText().toString())) {
-                    if (Float.parseFloat(tvYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(tvYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
+                    if (Float.parseFloat(tvYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
                         SoundManager.playSound(2, 1);
                         Toast.makeText(YDZKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
@@ -321,14 +357,15 @@ public class YDZKSActivity extends BaseActivity {
             s_xlm_cs = s_xlm_cs + "<GD>" + GD + "</GD>";
             s_xlm_cs = s_xlm_cs + "<LOTNO>" + tvPH.getText().toString() + "</LOTNO>";
             s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
+            s_xlm_cs = s_xlm_cs + "<YDMJ>" + tvYDMJ.getText().toString() + "</YDMJ>";
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";
             s_xlm_cs = s_xlm_cs + "<JDFJ>" + tvJDFJ.getText().toString() + "</JDFJ>";
             s_xlm_cs = s_xlm_cs + "<YDFJ>" + tvYDFJ.getText().toString() + "</YDFJ>";
             s_xlm_cs = s_xlm_cs + "<TJY>" + tvTJY.getText().toString() + "</TJY>";
             s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
-            s_xlm_cs = s_xlm_cs + "<YZDZJ>" + tvJDLLZ.getText().toString() + "</YZDZJ>";
-            s_xlm_cs = s_xlm_cs + "<YZDZY>" + tvYDLLZ.getText().toString() + "</YZDZY>";
-            s_xlm_cs = s_xlm_cs + "<YZQRWG>" + JCY + "</YZQRWG>";
+            s_xlm_cs = s_xlm_cs + "<YZDZJLLZ>" + tvJDLLZ.getText().toString() + "</YZDZJLLZ>";
+            s_xlm_cs = s_xlm_cs + "<YZDZYLLZ>" + tvYDLLZ.getText().toString() + "</YZDZYLLZ>";
+            s_xlm_cs = s_xlm_cs + "<JCYLLS>" + JCY + "</JCYLLS>";
             s_xlm_cs = s_xlm_cs + "<LL>" + etLL.getText().toString() + "</LL>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
             s_xlm_cs = s_xlm_cs + "</ROOT>";

@@ -34,6 +34,7 @@ import com.jydy.pda.main.LoginActivity;
 import com.jydy.pda.utils.Logs;
 import com.jydy.pda.utils.SoundManager;
 import com.imscs.barcodemanager.BarcodeManager;
+import com.jydy.pda.view.CustomDialog1;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,11 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static android.content.ContentValues.TAG;
-import static android.os.Build.VERSION_CODES.M;
-import static com.jydy.pda.R.id.tvJXLX;
-import static com.jydy.pda.R.id.tvPM;
-import static com.jydy.pda.R.id.tvTJY;
 
 /**
  * Created by 23923 on 2017/2/7.
@@ -59,8 +55,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
     String type, ID, NAME;//扫描模具条码，解析的三个字段。
     String PM, JCQRS;//喷码，检查确认
     String flag, error,MAXSCZS,MINSCZS,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL;
-    TextView tvGD, tvGP, tvBB, tvSB, tvMJ, tvPL, tvPH, tvXZ, tvXJ, tvQXCD, tvQPCDJ, tvQPCDY, tvUserID,tvPMLX;
-    Spinner spDBSL;
+    TextView tvGD, tvGP, tvBB, tvSB, tvMJ,tvYDMJ, tvPL, tvPH, tvXZ, tvXJ, tvQXCD, tvQPCDJ, tvQPCDY, tvUserID,tvPMLX;
     List<String> data_list;
     ArrayAdapter<String> arr_adapter;
     RadioButton rb_jcqrs_hg, rb_jcqrs_bhg, rb_pm_Y, rb_pm_N;
@@ -68,6 +63,12 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
     LinearLayout llPMLX;
     String[] strPMLX;
     boolean[] selectedPMLX;
+    EditText etDBSL,etYZCSSL;
+    TextView tvJDFJ,tvYDFJ;
+    CustomDialog1 builder;
+
+    String[] strFJ ;
+    boolean[] selected ;
 
     @Override
     protected int getContentLayout() {
@@ -81,6 +82,8 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         tvPMLX = (TextView) findViewById(R.id.tvPMLX);
         tvPL = (TextView) findViewById(R.id.tvPL);
         tvPH = (TextView) findViewById(R.id.tvPH);
+        tvJDFJ = (TextView) findViewById(R.id.tvJDFJ);
+        tvYDFJ = (TextView) findViewById(R.id.tvYDFJ);
         tvQXCD = (TextView) findViewById(R.id.tvQXCD);
         tvXZ = (TextView) findViewById(R.id.tvXZ);
         tvXJ = (TextView) findViewById(R.id.tvXJ);
@@ -91,19 +94,24 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         tvBB = (TextView) findViewById(R.id.tvBB);
         tvSB = (TextView) findViewById(R.id.tvSB);
         tvMJ = (TextView) findViewById(R.id.tvMJ);
+        tvYDMJ = (TextView) findViewById(R.id.tvYDMJ);
         etTM = (EditText) findViewById(R.id.etTM);
+        etDBSL = (EditText) findViewById(R.id.etDBSL);
+        etYZCSSL = (EditText) findViewById(R.id.etYZCSSL);
         etJDLLZ = (EditText) findViewById(R.id.etJDLLZ);
         etYDLLZ = (EditText) findViewById(R.id.etYDLLZ);
-        spDBSL = (Spinner) findViewById(R.id.spDBSL);
         etSCZS = (EditText) findViewById(R.id.etSCZS);
         btnSave = (Button) findViewById(R.id.btnSave);
         rb_jcqrs_hg = (RadioButton) findViewById(R.id.rb_jcqrs_hg);
         rb_jcqrs_bhg = (RadioButton) findViewById(R.id.rb_jcqrs_bhg);
         rb_pm_Y = (RadioButton) findViewById(R.id.rb_pm_Y);
         rb_pm_N = (RadioButton) findViewById(R.id.rb_pm_N);
-//获取喷码类型信息
+        //获取喷码类型信息
         Thread mThread1 = new Thread(getPMLXRunnable);
         mThread1.start();
+        //获取附件信息
+        Thread mThread = new Thread(getFJRunnable);
+        mThread.start();
     }
 
     @Override
@@ -114,6 +122,8 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         rb_jcqrs_bhg.setOnClickListener(this);
         rb_pm_Y.setOnClickListener(this);
         rb_pm_N.setOnClickListener(this);
+        tvJDFJ.setOnClickListener(this);
+        tvYDFJ.setOnClickListener(this);
         rb_pm_Y.performClick();
         rb_jcqrs_hg.performClick();
         //监听产品条码Edittext
@@ -151,17 +161,8 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
         tvQXCD.setText(QXCD);
         tvQPCDJ.setText(QPCDJ);
         tvQPCDY.setText(QPCDY);
-        data_list = new ArrayList<String>();
-        data_list.add("1");
-        data_list.add("5");
-        data_list.add("10");
-        data_list.add("25");
-        //适配器
-        arr_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
-        //设置样式
-        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spDBSL.setAdapter(arr_adapter);
-        spDBSL.setSelection(3);
+        etYZCSSL.setText(PL);
+
     }
 
     @Override
@@ -182,8 +183,29 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 tvSB.setText(ID);
                 etTM.getText().clear();
             } else if (type.equals("104")) {
-                tvMJ.setText(ID);
-                etTM.getText().clear();
+                builder = new CustomDialog1(this,
+                        R.style.customdialog);
+                String str1 = "请选择甲端模具或乙端模具！";
+                builder.setmessage(str1);
+                builder.setpositiveButton("甲端", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tvMJ.setText(ID);
+                        etTM.getText().clear();
+                        builder.dismiss();
+                    }
+                });
+                builder.setnegativeButton("乙端", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tvYDMJ.setText(ID);
+                        etTM.getText().clear();
+                        builder.dismiss();
+                    }
+                });
+                builder.setCancelable(true);
+                builder.show();
+
             } else {
                 Toast.makeText(CJKSActivity.this, "请扫描人员、设备或模具条码！", Toast.LENGTH_SHORT).show();
                 etTM.getText().clear();
@@ -230,6 +252,12 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             case R.id.rb_jcqrs_bhg:
                 JCQRS = "N";
                 break;
+            case R.id.tvJDFJ:
+                showDialog("甲端附件",strFJ,selected,tvJDFJ);
+                break;
+            case R.id.tvYDFJ:
+                showDialog("乙端附件",strFJ,selected,tvYDFJ);
+                break;
 
             case R.id.btnSave:
                 if (TextUtils.isEmpty(tvBB.getText().toString())) {
@@ -239,10 +267,6 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                 } else if (TextUtils.isEmpty(tvSB.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(CJKSActivity.this, "请扫描设备！", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if (TextUtils.isEmpty(tvMJ.getText().toString())) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(CJKSActivity.this, "请扫描模具！", Toast.LENGTH_SHORT).show();
                     return;
                 }else if (TextUtils.isEmpty(tvPMLX.getText().toString())&PM.equals("Y")) {
                     SoundManager.playSound(2, 1);
@@ -260,19 +284,75 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                         return;
                     }
                 }
+                if (!TextUtils.isEmpty(tvMJ.getText().toString())) {
+                    if (TextUtils.isEmpty(etJDLLZ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                if (!TextUtils.isEmpty(tvJDFJ.getText().toString())) {
+                    if (TextUtils.isEmpty(etJDLLZ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(tvMJ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                  if (!TextUtils.isEmpty(etJDLLZ.getText().toString())) {
-                    if (Float.parseFloat(etJDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZJLL)||Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
+                    if (Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
                         SoundManager.playSound(2, 1);
                         Toast.makeText(CJKSActivity.this, "甲端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                     if (TextUtils.isEmpty(tvMJ.getText().toString())){
+                         Toast.makeText(CJKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+                     if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
+                         Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+                }
+                if (!TextUtils.isEmpty(tvYDMJ.getText().toString())) {
+                    if (TextUtils.isEmpty(etYDLLZ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                if (!TextUtils.isEmpty(tvYDFJ.getText().toString())) {
+                    if (TextUtils.isEmpty(etYDLLZ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(tvYDMJ.getText().toString())){
+                        Toast.makeText(CJKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
                  if (!TextUtils.isEmpty(etYDLLZ.getText().toString())) {
-                   if (Float.parseFloat(etYDLLZ.getText().toString().trim())>Float.parseFloat(MAXYZDZYLL)||Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
+                   if (Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
                        SoundManager.playSound(2, 1);
                        Toast.makeText(CJKSActivity.this, "乙端拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                        return;
                    }
+                     if (TextUtils.isEmpty(tvYDMJ.getText().toString())){
+                         Toast.makeText(CJKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
+                     if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
+                         Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
+                         return;
+                     }
                 }
 
                 Thread mThread = new Thread(nextRunnable);
@@ -339,6 +419,7 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<YG>" + tvBB.getText().toString() + "</YG>";
             s_xlm_cs = s_xlm_cs + "<SBJXBH>" + tvSB.getText().toString() + "</SBJXBH>";
             s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
+            s_xlm_cs = s_xlm_cs + "<YDMJ>" + tvYDMJ.getText().toString() + "</YDMJ>";
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";
             s_xlm_cs = s_xlm_cs + "<XZ>" + tvXZ.getText().toString() + "</XZ>";
             s_xlm_cs = s_xlm_cs + "<XJ>" + tvXJ.getText().toString() + "</XJ>";
@@ -349,7 +430,10 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
             s_xlm_cs = s_xlm_cs + "<YZDZJLLZ>" + etJDLLZ.getText().toString() + "</YZDZJLLZ>";
             s_xlm_cs = s_xlm_cs + "<YZDZYLLZ>" + etYDLLZ.getText().toString() + "</YZDZYLLZ>";
-            s_xlm_cs = s_xlm_cs + "<QTY>" + spDBSL.getSelectedItem().toString() + "</QTY>";
+            s_xlm_cs = s_xlm_cs + "<QTY>" + etDBSL.getText().toString() + "</QTY>";
+            s_xlm_cs = s_xlm_cs + "<JDFJ>" + tvJDFJ.getText().toString() + "</JDFJ>";
+            s_xlm_cs = s_xlm_cs + "<YDFJ>" + tvYDFJ.getText().toString() + "</YDFJ>";
+            s_xlm_cs = s_xlm_cs + "<YZCSQTY>" + etYZCSSL.getText().toString() + "</YZCSQTY>";
             s_xlm_cs = s_xlm_cs + "<JCQRS>" + JCQRS + "</JCQRS>";
             s_xlm_cs = s_xlm_cs + "<PM>" + PM + "</PM>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
@@ -416,4 +500,41 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
             Looper.loop();
         }
     };
+    Runnable getFJRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            Looper.prepare();
+            Map<String, String> params = new HashMap<String, String>();
+            String s_xlm_cs = "<?xml version=\"1.0\" encoding=\"GB2312\"?>";
+            s_xlm_cs = s_xlm_cs + "<ROOT>";
+            s_xlm_cs = s_xlm_cs + "<DETAIL>";
+            s_xlm_cs = s_xlm_cs + "<USERID>" + Constants.USERID + "</USERID>";
+            s_xlm_cs = s_xlm_cs + "<DATABASE>" + Constants.DATABASE + "</DATABASE>";
+            s_xlm_cs = s_xlm_cs + "<SN>" + Constants.SN + "</SN>";
+            s_xlm_cs = s_xlm_cs + "</DETAIL>";
+            s_xlm_cs = s_xlm_cs + "</ROOT>";
+            params.put("s_xml_cs", s_xlm_cs);
+            Logs.d(TAG, s_xlm_cs);
+            try {
+                String str = CallWebService.CallWebService(Constants.Get_FJMethodName, Constants.Namespace, params, Constants.getHttp());
+                Logs.d(TAG, str);
+//                D/----返回的数据----: anyType{schema=anyType{element=anyType{complexType=anyType{choice=anyType{element=anyType{complexType=anyType{sequence=anyType{element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; element=anyType{}; }; }; }; }; }; }; }; diffgram=anyType{NewDataSet=anyType{TAB_FJ=anyType{FJ001=60001; FJ002=附件01; FJ003=Y; FJ004=anyType{}; }; }; }; }
+                ArrayList<Map<String, Object>> list = DecodeXml.decodeDataset(str,"TAB_FJ");
+                strFJ = new String[list.size()];
+                selected = new boolean[list.size()];
+                for (int i = 0; i < list.size(); i++) {
+                    strFJ[i] = list.get(i).get("FJ002").toString();
+                    selected[i] = false;
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                SoundManager.playSound(2, 1);
+                Toast.makeText(CJKSActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+            }
+            Looper.loop();
+        }
+    };
+
 }

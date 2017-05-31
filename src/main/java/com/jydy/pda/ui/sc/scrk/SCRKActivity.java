@@ -38,10 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static android.R.attr.type;
-import static com.jydy.pda.R.id.etGpForm;
-import static com.jydy.pda.R.id.etGyForm;
-import static com.jydy.pda.R.id.spDBSL;
-import static com.jydy.pda.R.id.tvGD;
+
 
 /**
  * Created by 23923 on 2017/2/7.

@@ -69,6 +69,7 @@ public class Constants {
 	public static final String GetCMSMEMethodName = "GetCMSME";//获取部门
 	public static final String GetProductMethodName = "Get_Product";//获取产品信息
 	public static final String Save_SCAN_CommitMethodName = "Save_SCAN_Commit";//生产入库提交
+	public static final String Get_GPJDMethodName = "Get_GPJD";//获取工票进度信息
 
 
 

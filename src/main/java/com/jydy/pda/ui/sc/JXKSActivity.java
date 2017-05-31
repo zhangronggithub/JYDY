@@ -130,11 +130,11 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-//                if(tvZYY.getText().toString().contains(ID)){
-//                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
-//                }else {
-                    tvZYY.setText(ID );
-//                }
+                if(tvZYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvZYY.setText(tvZYY.getText().toString() + ID + ";");
+                }
                 etTM.getText().clear();
             }else if (type.equals("104")) {
                 tvMJ.setText(ID);

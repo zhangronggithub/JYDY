@@ -1,5 +1,6 @@
 package com.jydy.pda.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.jydy.pda.R;
 import com.jydy.pda.main.FormScanActivity;
 import com.jydy.pda.ui.sc.FZKSActivity;
+import com.jydy.pda.ui.sc.JDCXActivity;
 import com.jydy.pda.ui.sc.JXKSActivity;
 import com.jydy.pda.ui.sc.YDZKSActivity;
 import com.jydy.pda.ui.sc.scrk.SCRKActivity;
@@ -118,7 +120,7 @@ public class SCFragment extends Fragment  implements AdapterView.OnItemClickList
 //                ShowDialog("1");
                 break;
             case 2:
-                Intent i2 = new Intent(getActivity(), FZKSActivity.class);
+                Intent i2= new Intent(getActivity(),  JDCXActivity.class);
                 startActivity(i2);
                 break;
             case 3:

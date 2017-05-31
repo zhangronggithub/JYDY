@@ -154,10 +154,27 @@
 
                     <TextView
                         style="@style/My_Left_TextView"
-                        android:text="作业类型:" />
+                        android:text="甲端作业类型:" />
 
                     <TextView
-                        android:id="@+id/tvZYLX"
+                        android:id="@+id/tvJDZYLX"
+                        style="@style/My_Right_TextView"
+                        android:background="@null"/>
+
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="乙端作业类型:" />
+
+                    <TextView
+                        android:id="@+id/tvYDZYLX"
                         style="@style/My_Right_TextView"
                         android:background="@null"/>
 

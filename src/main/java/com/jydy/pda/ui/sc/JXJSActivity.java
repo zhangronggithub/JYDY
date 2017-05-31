@@ -79,7 +79,7 @@ public class JXJSActivity extends BaseActivity {
 
     String yzwgqr,flag,error,type,ID,NAME;
 
-    String GD, GP, GY, PL,MAXSCZZ2,MINSCZZ2;
+    String GD, GP, GY, PL,MAXSCZZ2,MINSCZZ2,MINLL,SCZS;
     @Override
     protected int getContentLayout() {
         return R.layout.activity_jxjs;
@@ -104,9 +104,12 @@ public class JXJSActivity extends BaseActivity {
         PL = getIntent().getStringExtra("PL");
         MAXSCZZ2 = getIntent().getStringExtra("MAXSCZZ2");
         MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
+        MINLL = getIntent().getStringExtra("MINLL");
+        SCZS = getIntent().getStringExtra("SCZS");
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvUserID.setText(Constants.USERID);
+        etSCZZ.setText(SCZS);
     }
 
     @Override
@@ -117,11 +120,11 @@ public class JXJSActivity extends BaseActivity {
             ID = DecodeXml.decodeXml(tmStr, "ID");
             NAME = DecodeXml.decodeXml(tmStr, "NAME");
             if (type.equals("102")) {
-                if(tvJCY.getText().toString().contains(ID)){
-                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
-                }else {
-                    tvJCY.setText(tvJCY.getText().toString() + ID + ";");
-                }
+//                if(tvJCY.getText().toString().contains(ID)){
+//                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+//                }else {
+                    tvJCY.setText( ID);
+//                }
                 etTM.getText().clear();
             } else {
                 Toast.makeText(JXJSActivity.this, "请扫描检查员条码！", Toast.LENGTH_SHORT).show();
@@ -178,6 +181,11 @@ public class JXJSActivity extends BaseActivity {
                 }else if (TextUtils.isEmpty(etYZSL.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(JXJSActivity.this, "请输入压着数量！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(JXJSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!TextUtils.isEmpty(etSCZZ.getText().toString())) {

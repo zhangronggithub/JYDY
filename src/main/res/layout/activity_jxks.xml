@@ -260,7 +260,7 @@
 
                     <TextView
                         style="@style/My_Left_TextView"
-                        android:text="实测值始:" />
+                        android:text="拉力实测始:" />
 
                     <EditText
                         android:id="@+id/etSCZS"

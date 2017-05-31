@@ -162,7 +162,7 @@
 
                     <TextView
                         style="@style/My_Left_TextView2"
-                        android:text="模具:" />
+                        android:text="甲端模具:" />
 
                     <TextView
                         android:id="@+id/tvMJ"
@@ -175,6 +175,25 @@
                     android:background="@color/line" />
 
                 <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView2"
+                        android:text="乙端模具:" />
+
+                    <TextView
+                        android:id="@+id/tvYDMJ"
+                        style="@style/My_Right_TextView" />
+
+                </LinearLayout>
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    style="@style/My_LinearLayout">
 
                     <TextView
                         style="@style/My_Left_TextView"
@@ -223,11 +242,14 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/line" />
 
-                <LinearLayout style="@style/My_LinearLayout">
+                <LinearLayout
+                    android:visibility="gone"
+                    style="@style/My_LinearLayout">
 
                     <TextView
                         style="@style/My_Left_TextView"

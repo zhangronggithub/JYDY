@@ -48,7 +48,7 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
 
     EditText etTM, etWGSL, etBLSL, etSCZZ;
 
-    String jcqrz, yzxg, type, ID, NAME, flag, error, GP, GD, GY, PL,MAXSCZZ2,MINSCZZ2;
+    String jcqrz, yzxg, type, ID, NAME, flag, error, GP, GD, GY, PL,MAXSCZZ2,MINSCZZ2,SCZS;
 
     TextView tvBLYY, tvPL, tvUserID, tvGP;
 
@@ -97,10 +97,12 @@ public class CJJSActivity extends BaseActivity implements View.OnClickListener {
         PL = getIntent().getStringExtra("PL");
         MAXSCZZ2 = getIntent().getStringExtra("MAXSCZZ2");
         MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
+        SCZS = getIntent().getStringExtra("SCZS");
         tvUserID.setText(Constants.USERID);
         etWGSL.setText(PL);
         tvGP.setText(GP);
         tvPL.setText(PL);
+        etSCZZ.setText(SCZS);
 
     }
 

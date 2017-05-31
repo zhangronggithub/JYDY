@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tvSEQ"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+    <TextView
+        android:id="@+id/tvCK"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvPH"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvPM"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvSMSJ"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+    <TextView
+        android:id="@+id/tvDW"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/tvLOTNO"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvQTY"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvGG"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvCPTM"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+
+    <TextView
+        android:id="@+id/tvKWTM"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+
+
+    <TextView
+        android:id="@+id/tvLB"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+
+    <TextView
+        android:id="@+id/tvJDLL"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+    <ImageView
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#CACACA" />
+
+    <TextView
+        android:id="@+id/tvYDLL"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center" />
+
+
+
+</LinearLayout>

@@ -21,6 +21,8 @@ import com.jydy.pda.main.BaseActivity;
 import com.jydy.pda.utils.Logs;
 import com.jydy.pda.utils.SoundManager;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ import static com.jydy.pda.R.raw.error;
 
 public class YDZJSActivity extends BaseActivity {
 
-    String GD, GP, GY, PL, LOTNO,yzqrwg,jcy,flag,error,type,ID,NAME;
+    String GD, GP, GY, PL, LOTNO,yzqrwg="Y",jcy,flag,error,type,ID,NAME;
     @Bind(R.id.tvTitle)
     TextView tvTitle;
     @Bind(R.id.tvUserID)
@@ -65,7 +67,7 @@ public class YDZJSActivity extends BaseActivity {
     @Bind(R.id.tvBLSL)
     EditText tvBLSL;
     @Bind(R.id.tvBLYY)
-    EditText tvBLYY;
+    TextView tvBLYY;
     @Bind(R.id.etYZCSSL)
     EditText etYZCSSL;
     @Bind(R.id.rb_yzqrwg_hg)
@@ -108,6 +110,7 @@ public class YDZJSActivity extends BaseActivity {
         tvUserID.setText(Constants.USERID);
         rbJcyHg.performClick();
         rbYzqrwgHg.performClick();
+        Logs.d("11111111",yzqrwg+"111111");
 
     }
 
@@ -155,6 +158,7 @@ public class YDZJSActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.rb_yzqrwg_hg:
                 yzqrwg = "Y";
+                Logs.d("22222",yzqrwg+"22222");
                 break;
             case R.id.rb_yzqrwg_bhg:
                 yzqrwg = "N";
@@ -179,6 +183,7 @@ public class YDZJSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZJSActivity.this, "请输入压着次数数量！", Toast.LENGTH_SHORT).show();
                 }  else {
+                    Logs.d("33333",yzqrwg+"33333");
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
                 }
