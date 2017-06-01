@@ -110,6 +110,7 @@ public class JXJSActivity extends BaseActivity {
         tvPL.setText(PL);
         tvUserID.setText(Constants.USERID);
         etSCZZ.setText(SCZS);
+        etYZSL.setText(PL);
     }
 
     @Override

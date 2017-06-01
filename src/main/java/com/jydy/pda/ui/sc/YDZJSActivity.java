@@ -107,6 +107,7 @@ public class YDZJSActivity extends BaseActivity {
         tvPL.setText(PL);
         tvPH.setText(LOTNO);
         tvWGSL.setText(PL);
+        etYZCSSL.setText(PL);
         tvUserID.setText(Constants.USERID);
         rbJcyHg.performClick();
         rbYzqrwgHg.performClick();

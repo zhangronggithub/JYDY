@@ -52,7 +52,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private Dialog myWaitDialog;
 
-    private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL,SCZS;
+    private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL,SCZS,MJ,YDMJ,JDFJ,YDFJ;
 
     private LinearLayout llGYBH;
 

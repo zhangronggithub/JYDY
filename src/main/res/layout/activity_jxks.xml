@@ -266,6 +266,8 @@
                         android:id="@+id/etSCZS"
                         style="@style/My_Right_TextView"
                         android:background="@null"
+                        android:inputType="number"
+                        android:digits="0123456789."
                         />
 
                 </LinearLayout>

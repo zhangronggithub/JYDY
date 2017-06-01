@@ -272,18 +272,18 @@ public class YDZKSActivity extends BaseActivity {
                     Toast.makeText(YDZKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
-                    if(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)){
-                        SoundManager.playSound(2, 1);
-                        Toast.makeText(YDZKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
+//                if (Float.parseFloat(etLL.getText().toString().trim())<Float.parseFloat(MINLL)) {
+//                    SoundManager.playSound(2, 1);
+//                    Toast.makeText(YDZKSActivity.this, "拉力值不在范围之类！", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
+//                    if(Float.parseFloat(etSCZS.getText().toString().trim())>Float.parseFloat(MAXSCZS)||Float.parseFloat(etSCZS.getText().toString().trim())<Float.parseFloat(MINSCZS)){
+//                        SoundManager.playSound(2, 1);
+//                        Toast.makeText(YDZKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
                 if (!TextUtils.isEmpty(tvJDLLZ.getText().toString())) {
                     if (Float.parseFloat(tvJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
                         SoundManager.playSound(2, 1);
@@ -356,17 +356,21 @@ public class YDZKSActivity extends BaseActivity {
             s_xlm_cs = s_xlm_cs + "<GP>" + GP + "</GP>";
             s_xlm_cs = s_xlm_cs + "<GD>" + GD + "</GD>";
             s_xlm_cs = s_xlm_cs + "<LOTNO>" + tvPH.getText().toString() + "</LOTNO>";
-            s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
-            s_xlm_cs = s_xlm_cs + "<YDMJ>" + tvYDMJ.getText().toString() + "</YDMJ>";
+            if (JDLLZ==null) {
+                s_xlm_cs = s_xlm_cs + "<MJ>" + tvMJ.getText().toString() + "</MJ>";
+                s_xlm_cs = s_xlm_cs + "<JDFJ>" + tvJDFJ.getText().toString() + "</JDFJ>";
+                s_xlm_cs = s_xlm_cs + "<YZDZJLLZ>" + tvJDLLZ.getText().toString() + "</YZDZJLLZ>";
+            }
+            if (YDLLZ==null) {
+                s_xlm_cs = s_xlm_cs + "<YDMJ>" + tvYDMJ.getText().toString() + "</YDMJ>";
+                s_xlm_cs = s_xlm_cs + "<YDFJ>" + tvYDFJ.getText().toString() + "</YDFJ>";
+                s_xlm_cs = s_xlm_cs + "<YZDZYLLZ>" + tvYDLLZ.getText().toString() + "</YZDZYLLZ>";
+            }
             s_xlm_cs = s_xlm_cs + "<PL>" + tvPL.getText().toString() + "</PL>";
-            s_xlm_cs = s_xlm_cs + "<JDFJ>" + tvJDFJ.getText().toString() + "</JDFJ>";
-            s_xlm_cs = s_xlm_cs + "<YDFJ>" + tvYDFJ.getText().toString() + "</YDFJ>";
             s_xlm_cs = s_xlm_cs + "<TJY>" + tvTJY.getText().toString() + "</TJY>";
-            s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
-            s_xlm_cs = s_xlm_cs + "<YZDZJLLZ>" + tvJDLLZ.getText().toString() + "</YZDZJLLZ>";
-            s_xlm_cs = s_xlm_cs + "<YZDZYLLZ>" + tvYDLLZ.getText().toString() + "</YZDZYLLZ>";
+//            s_xlm_cs = s_xlm_cs + "<SCZS>" + etSCZS.getText().toString() + "</SCZS>";
             s_xlm_cs = s_xlm_cs + "<JCYLLS>" + JCY + "</JCYLLS>";
-            s_xlm_cs = s_xlm_cs + "<LL>" + etLL.getText().toString() + "</LL>";
+//            s_xlm_cs = s_xlm_cs + "<LL>" + etLL.getText().toString() + "</LL>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
             s_xlm_cs = s_xlm_cs + "</ROOT>";
             params.put("s_xml_cs", s_xlm_cs);

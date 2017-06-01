@@ -16,7 +16,7 @@ public class Constants {
 	// Http
 	public static  String HTTP_ROOT = "http://";
 	// Http请求地址
-	public static   String HTTP_IP = "10.10.1.21";
+	public static   String HTTP_IP = "192.168.0.238";
 	//10.0.2.2
 	//命名空间
 	public static  String Namespace = "http://127.1.1.0/";
@@ -86,7 +86,7 @@ public class Constants {
 	// 获取下载apk地址
 	public static String APKURL()
 	{
-		return HTTP_ROOT + HTTP_IP + "/barcode/webservice/Sears/download/JYDY.zip";
+		return HTTP_ROOT + HTTP_IP + "/barcode/webservice/download_app/JYDY.zip";
 	}
 
 	//控制按钮的重复点击
