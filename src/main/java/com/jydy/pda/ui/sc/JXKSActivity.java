@@ -204,9 +204,9 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                     return;
                 }
                 if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
-                    if (Float.parseFloat(etSCZS.getText().toString().trim()) > Float.parseFloat(MAXSCZS) || Float.parseFloat(etSCZS.getText().toString().trim()) < Float.parseFloat(MINSCZS)) {
+                    if (Float.parseFloat(etSCZS.getText().toString().trim()) < Float.parseFloat(MINSCZS)) {
                         SoundManager.playSound(2, 1);
-                        Toast.makeText(JXKSActivity.this, "实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JXKSActivity.this, "拉力实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }

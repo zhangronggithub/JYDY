@@ -190,9 +190,9 @@ public class JXJSActivity extends BaseActivity {
                     return;
                 }
                 if (!TextUtils.isEmpty(etSCZZ.getText().toString())) {
-                    if (Float.parseFloat(etSCZZ.getText().toString().trim())>Float.parseFloat(MAXSCZZ2)||Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)){
+                    if (Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)){
                         SoundManager.playSound(2, 1);
-                        Toast.makeText(JXJSActivity.this, "实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JXJSActivity.this, "拉力实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
