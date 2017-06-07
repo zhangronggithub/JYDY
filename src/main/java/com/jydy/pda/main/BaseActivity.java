@@ -281,14 +281,6 @@ public abstract class BaseActivity extends Activity implements  BarcodeManager.O
                         e.printStackTrace();
                     }
 //                    strDecodeResult = decodeResult.result;
-//                    try{
-//                        byte[] a = strDecodeResult.getBytes("UTF-8");
-//                        String b = new String(a,"SJIS");
-//                        Logs.d(b);
-//                        showTM(b);
-//                    }catch(Exception e){
-//
-//                    }
                     break;
 
                 case com.imscs.barcodemanager.Constants.DecoderReturnCode.RESULT_SCAN_FAIL: {

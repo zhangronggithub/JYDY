@@ -289,21 +289,21 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                         Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+//                    if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
                 }
-                if (!TextUtils.isEmpty(tvJDFJ.getText().toString())) {
-                    if (TextUtils.isEmpty(etJDLLZ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(tvMJ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
+//                if (!TextUtils.isEmpty(tvJDFJ.getText().toString())) {
+//                    if (TextUtils.isEmpty(etJDLLZ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(tvMJ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
                  if (!TextUtils.isEmpty(etJDLLZ.getText().toString())) {
                     if (Float.parseFloat(etJDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZJLL)){
                         SoundManager.playSound(2, 1);
@@ -314,31 +314,31 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                          Toast.makeText(CJKSActivity.this, "请扫描甲端模具！", Toast.LENGTH_SHORT).show();
                          return;
                      }
-                     if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
-                         Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
-                         return;
-                     }
+//                     if (TextUtils.isEmpty(tvJDFJ.getText().toString())){
+//                         Toast.makeText(CJKSActivity.this, "请选择甲端附件！", Toast.LENGTH_SHORT).show();
+//                         return;
+//                     }
                 }
                 if (!TextUtils.isEmpty(tvYDMJ.getText().toString())) {
                     if (TextUtils.isEmpty(etYDLLZ.getText().toString())){
                         Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+//                    if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
                 }
-                if (!TextUtils.isEmpty(tvYDFJ.getText().toString())) {
-                    if (TextUtils.isEmpty(etYDLLZ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(tvYDMJ.getText().toString())){
-                        Toast.makeText(CJKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
+//                if (!TextUtils.isEmpty(tvYDFJ.getText().toString())) {
+//                    if (TextUtils.isEmpty(etYDLLZ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请输入乙端拉力值！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(tvYDMJ.getText().toString())){
+//                        Toast.makeText(CJKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                }
                  if (!TextUtils.isEmpty(etYDLLZ.getText().toString())) {
                    if (Float.parseFloat(etYDLLZ.getText().toString().trim())<Float.parseFloat(MINYZDZYLL)){
                        SoundManager.playSound(2, 1);
@@ -349,10 +349,10 @@ public class CJKSActivity extends BaseActivity implements View.OnClickListener {
                          Toast.makeText(CJKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
                          return;
                      }
-                     if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
-                         Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
-                         return;
-                     }
+//                     if (TextUtils.isEmpty(tvYDFJ.getText().toString())){
+//                         Toast.makeText(CJKSActivity.this, "请选择乙端附件！", Toast.LENGTH_SHORT).show();
+//                         return;
+//                     }
                 }
 
                 Thread mThread = new Thread(nextRunnable);

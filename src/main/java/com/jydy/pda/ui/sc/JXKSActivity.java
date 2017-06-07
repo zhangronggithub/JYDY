@@ -78,7 +78,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.btnSave)
     Button btnSave;
 
-    String xhjc,flag,error,type,ID,NAME,MAXSCZS,MINSCZS;
+    String xhjc,flag,error,type,ID,NAME,MAXSCZS,MINSCZS,MINLL;
     String GD, GP, GY, PL, LOTNO,JH;
     String[] strJXLX,strFZLX,strDZM;
     boolean[] selectedJXLX, selectedFZLX, selectedDZM;
@@ -115,6 +115,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
         LOTNO = getIntent().getStringExtra("LOTNO");
         MAXSCZS = getIntent().getStringExtra("MAXSCZS");
         MINSCZS = getIntent().getStringExtra("MINSCZS");
+        MINLL = getIntent().getStringExtra("MINLL");
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvPH.setText(LOTNO);
@@ -204,7 +205,7 @@ public class JXKSActivity extends BaseActivity implements View.OnClickListener {
                     return;
                 }
                 if (!TextUtils.isEmpty(etSCZS.getText().toString())) {
-                    if (Float.parseFloat(etSCZS.getText().toString().trim()) < Float.parseFloat(MINSCZS)) {
+                    if (Float.parseFloat(etSCZS.getText().toString().trim()) < Float.parseFloat(MINLL)) {
                         SoundManager.playSound(2, 1);
                         Toast.makeText(JXKSActivity.this, "拉力实测值始不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;

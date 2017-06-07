@@ -22,6 +22,8 @@ import com.jydy.pda.main.BaseActivity;
 import com.jydy.pda.utils.Logs;
 import com.jydy.pda.utils.SoundManager;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +66,12 @@ public class JXJSActivity extends BaseActivity {
     EditText etTM;
     @Bind(R.id.tvJCY)
     TextView tvJCY;
+    @Bind(R.id.etWGSL)
+    EditText etWGSL;
+    @Bind(R.id.etBLSL)
+    EditText etBLSL;
+    @Bind(R.id.tvBLYY)
+    TextView tvBLYY;
     @Bind(R.id.etLL)
     EditText etLL;
     @Bind(R.id.etSCZZ)
@@ -79,7 +87,7 @@ public class JXJSActivity extends BaseActivity {
 
     String yzwgqr,flag,error,type,ID,NAME;
 
-    String GD, GP, GY, PL,MAXSCZZ2,MINSCZZ2,MINLL,SCZS;
+    String GD, GP, GY, PL,MAXSCZZ2,MINSCZZ2,MINLL,SCZS,LL;
     @Override
     protected int getContentLayout() {
         return R.layout.activity_jxjs;
@@ -106,11 +114,14 @@ public class JXJSActivity extends BaseActivity {
         MINSCZZ2 = getIntent().getStringExtra("MINSCZZ2");
         MINLL = getIntent().getStringExtra("MINLL");
         SCZS = getIntent().getStringExtra("SCZS");
+        LL = getIntent().getStringExtra("LL");
         tvGP.setText(GP);
         tvPL.setText(PL);
         tvUserID.setText(Constants.USERID);
         etSCZZ.setText(SCZS);
         etYZSL.setText(PL);
+        etLL.setText(LL);
+        etWGSL.setText(PL);
     }
 
     @Override
@@ -127,12 +138,20 @@ public class JXJSActivity extends BaseActivity {
                     tvJCY.setText( ID);
 //                }
                 etTM.getText().clear();
-            } else {
-                Toast.makeText(JXJSActivity.this, "请扫描检查员条码！", Toast.LENGTH_SHORT).show();
+            }else  if (type.equals("109")) {
+                if(tvBLYY.getText().toString().contains(ID)){
+                    Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                }else {
+                    tvBLYY.setText(tvBLYY.getText().toString() + ID + ";");
+                }
+                etTM.getText().clear();
+
+        } else {
+                Toast.makeText(JXJSActivity.this, "请扫描检查员,不良原因条码！", Toast.LENGTH_SHORT).show();
                 etTM.getText().clear();
             }
         } catch (Exception e) {
-            Toast.makeText(JXJSActivity.this, "请扫描检查员条码！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JXJSActivity.this, "请扫描检查员，不良原因条码！", Toast.LENGTH_SHORT).show();
             etTM.getText().clear();
         }
     }
@@ -167,7 +186,20 @@ public class JXJSActivity extends BaseActivity {
                 yzwgqr = "N";
                 break;
             case R.id.btnSave:
-                if (TextUtils.isEmpty(tvJCY.getText().toString())) {
+                if (TextUtils.isEmpty(etWGSL.getText().toString())) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(this, "请输入完工数量！", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (TextUtils.isEmpty(etBLSL.getText().toString())) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(this, "请输入不良数量！", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (TextUtils.isEmpty(tvBLYY.getText().toString())&Float.parseFloat(etBLSL.getText().toString())>0) {
+                    SoundManager.playSound(2, 1);
+                    Toast.makeText(this, "请扫描不良原因！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (TextUtils.isEmpty(tvJCY.getText().toString())) {
                     SoundManager.playSound(2, 1);
                    Toast.makeText( JXJSActivity.this, "请扫描检查员！", Toast.LENGTH_SHORT).show();
                     return;
@@ -190,7 +222,7 @@ public class JXJSActivity extends BaseActivity {
                     return;
                 }
                 if (!TextUtils.isEmpty(etSCZZ.getText().toString())) {
-                    if (Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINSCZZ2)){
+                    if (Float.parseFloat(etSCZZ.getText().toString().trim())<Float.parseFloat(MINLL)){
                         SoundManager.playSound(2, 1);
                         Toast.makeText(JXJSActivity.this, "拉力实测值终不在范围之类！", Toast.LENGTH_SHORT).show();
                         return;
@@ -224,6 +256,9 @@ public class JXJSActivity extends BaseActivity {
             s_xlm_cs = s_xlm_cs + "<SCZZ>" + etSCZZ.getText().toString() + "</SCZZ>";
             s_xlm_cs = s_xlm_cs + "<YZCSQTY>" + etYZSL.getText().toString() + "</YZCSQTY>";
             s_xlm_cs = s_xlm_cs + "<JCYZ>" + tvJCY.getText().toString() + "</JCYZ>";
+            s_xlm_cs = s_xlm_cs + "<BLYY>" + tvBLYY.getText().toString() + "</BLYY>";
+            s_xlm_cs = s_xlm_cs + "<BLQTY>" + etBLSL.getText().toString() + "</BLQTY>";
+            s_xlm_cs = s_xlm_cs + "<WGQTY>" + etWGSL.getText().toString() + "</WGQTY>";
             s_xlm_cs = s_xlm_cs + "</DETAIL>";
             s_xlm_cs = s_xlm_cs + "</ROOT>";
             params.put("s_xml_cs", s_xlm_cs);

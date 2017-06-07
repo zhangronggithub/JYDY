@@ -129,6 +129,63 @@
                         />
 
                 </LinearLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+                <LinearLayout style="@style/My_LinearLayout">
+
+                    <TextView
+                        style="@style/My_Left_TextView"
+                        android:text="完工数量:" />
+
+                    <EditText
+                        android:id="@+id/etWGSL"
+                        android:background="@null"
+                        style="@style/My_Right_TextView"
+                        android:inputType="number"
+                        android:digits="0123456789."/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line" />
+
+
+                    <LinearLayout style="@style/My_LinearLayout">
+
+                        <TextView
+                            style="@style/My_Left_TextView"
+                            android:text="不良数量:" />
+
+                        <EditText
+                            android:id="@+id/etBLSL"
+                            android:text="0"
+                            android:background="@null"
+                            style="@style/My_Right_TextView"
+                            android:inputType="number"
+                            android:digits="0123456789."/>
+
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/line" />
+                    <LinearLayout
+                        style="@style/My_LinearLayout">
+
+                        <TextView
+                            style="@style/My_Left_TextView1"
+                            android:text="不良原因:" />
+
+                        <TextView
+                            android:id="@+id/tvBLYY"
+                            style="@style/My_Right_TextView" />
+
+                    </LinearLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -223,7 +280,6 @@
                             android:drawableLeft="@drawable/radio_button_selector"
                             android:text="不合格" />
                     </RadioGroup>
-                    />
 
                 </LinearLayout>
 

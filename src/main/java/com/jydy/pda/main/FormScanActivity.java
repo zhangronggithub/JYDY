@@ -32,6 +32,8 @@ import com.jydy.pda.utils.SoundManager;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.os.Build.ID;
+import static com.jydy.pda.R.id.tvBB;
 import static com.jydy.pda.R.id.tvContent;
 
 public class FormScanActivity extends BaseActivity implements OnClickListener {
@@ -52,7 +54,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
 
     private Dialog myWaitDialog;
 
-    private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL,SCZS,MJ,YDMJ,JDFJ,YDFJ;
+    private String MINSCZS,MAXSCZS,MINSCZZ2,MAXSCZZ2,MINYZDZJLL,MAXYZDZJLL,MINYZDZYLL,MAXYZDZYLL,MINLL,MAXLL,SCZS,MJ,YDMJ,JDFJ,YDFJ,LL;
 
     private LinearLayout llGYBH;
 
@@ -94,6 +96,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void showTM(String tmStr) {
         if (tmStr.contains("C001")) {
+            etGpForm.getText().clear();
             try {
                 GyType = DecodeXml.decodeXml(tmStr, "C001");
                 GyID = DecodeXml.decodeXml(tmStr, "ID");
@@ -118,14 +121,29 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 SoundManager.playSound(2, 1);
                 Toast.makeText(FormScanActivity.this, "请先扫描工艺条码", Toast.LENGTH_SHORT).show();
             } else {
-                try {
-                    GP = DecodeXml.decodeXml(tmStr, "GP");
-                    GD = DecodeXml.decodeXml(tmStr, "GD");
-                } catch (Exception e) {
-                    Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
+                if (etGyForm.getText().toString().equals("7020")){
+                    try {
+                        GP = DecodeXml.decodeXml(tmStr, "GP");
+                        GD = DecodeXml.decodeXml(tmStr, "GD");
+                    } catch (Exception e) {
+                        Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
+                    }
+                    if(etGpForm.getText().toString().contains(GP)){
+                        Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
+                    }else {
+                        etGpForm.setText(etGpForm.getText().toString() + GP + ";");
+                    }
+                }else{
+                    try {
+                        GP = DecodeXml.decodeXml(tmStr, "GP");
+                        GD = DecodeXml.decodeXml(tmStr, "GD");
+                    } catch (Exception e) {
+                        Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
+                    }
+                    etGpForm.setText(GP);
+                    next();
                 }
-                etGpForm.setText(GP);
-                next();
+
             }
             }
         }
@@ -232,6 +250,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 MINLL = DecodeXml.decodeXml(str, "MINLL");
                 MAXLL = DecodeXml.decodeXml(str, "MAXLL");
                 SCZS = DecodeXml.decodeXml(str, "SCZS");
+                LL = DecodeXml.decodeXml(str, "LL");
 
                 if (flag.equals("S")) {
                     Logs.d(TAG, "111111");
@@ -315,6 +334,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("LOTNO", LOTNO);
                             intent.putExtra("MINSCZS", MINSCZS);
                             intent.putExtra("MAXSCZS", MAXSCZS);
+                            intent.putExtra("MINLL", MINLL);
                             startActivity(intent);
                         } else if (GPZT.equals("2")) {
                             Intent intent = new Intent(FormScanActivity.this, JXJSActivity.class);
@@ -327,6 +347,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                             intent.putExtra("MAXSCZZ2",MAXSCZZ2);
                             intent.putExtra("MINSCZZ2",MINSCZZ2);
                             intent.putExtra("MINLL", MINLL);
+                            intent.putExtra("LL", LL);
                             startActivity(intent);
                         }else if(GPZT.equals("3")) {
                             Toast.makeText(FormScanActivity.this, "此工票已完工！", Toast.LENGTH_SHORT).show();

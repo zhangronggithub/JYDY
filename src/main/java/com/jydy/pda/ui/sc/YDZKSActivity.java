@@ -131,14 +131,14 @@ public class YDZKSActivity extends BaseActivity {
             tvJDFJ.setEnabled(true);
         }else{
             tvJDLLZ.setEnabled(false);
-            tvJDFJ.setEnabled(false);
+            tvJDFJ.setEnabled(true);
         }
         if (YDLLZ==null){
             tvYDLLZ.setEnabled(true);
             tvYDFJ.setEnabled(true);
         }else{
             tvYDLLZ.setEnabled(false);
-            tvYDFJ.setEnabled(false);
+            tvYDFJ.setEnabled(true);
         }
         tvGP.setText(GP);
         tvPL.setText(PL);
@@ -255,15 +255,17 @@ public class YDZKSActivity extends BaseActivity {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请扫描乙端模具！", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (TextUtils.isEmpty(tvJDFJ.getText().toString())&JDLLZ==null) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "请输入甲端附件！", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if (TextUtils.isEmpty(tvYDFJ.getText().toString())&YDLLZ==null) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(YDZKSActivity.this, "请输入乙端附件！", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (TextUtils.isEmpty(tvJDLLZ.getText().toString())) {
+                }
+//                else if (TextUtils.isEmpty(tvJDFJ.getText().toString())&JDLLZ==null) {
+//                    SoundManager.playSound(2, 1);
+//                    Toast.makeText(YDZKSActivity.this, "请输入甲端附件！", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }else if (TextUtils.isEmpty(tvYDFJ.getText().toString())&YDLLZ==null) {
+//                    SoundManager.playSound(2, 1);
+//                    Toast.makeText(YDZKSActivity.this, "请输入乙端附件！", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                else if (TextUtils.isEmpty(tvJDLLZ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(YDZKSActivity.this, "请输入甲端拉力值！", Toast.LENGTH_SHORT).show();
                     return;
