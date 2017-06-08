@@ -131,14 +131,14 @@ public class YDZKSActivity extends BaseActivity {
             tvJDFJ.setEnabled(true);
         }else{
             tvJDLLZ.setEnabled(false);
-            tvJDFJ.setEnabled(true);
+            tvJDFJ.setEnabled(false);
         }
         if (YDLLZ==null){
             tvYDLLZ.setEnabled(true);
             tvYDFJ.setEnabled(true);
         }else{
             tvYDLLZ.setEnabled(false);
-            tvYDFJ.setEnabled(true);
+            tvYDFJ.setEnabled(false);
         }
         tvGP.setText(GP);
         tvPL.setText(PL);

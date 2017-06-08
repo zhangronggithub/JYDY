@@ -97,6 +97,8 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
     protected void showTM(String tmStr) {
         if (tmStr.contains("C001")) {
             etGpForm.getText().clear();
+            GP = "";
+            GD = "";
             try {
                 GyType = DecodeXml.decodeXml(tmStr, "C001");
                 GyID = DecodeXml.decodeXml(tmStr, "ID");
@@ -124,14 +126,17 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 if (etGyForm.getText().toString().equals("7020")){
                     try {
                         GP = DecodeXml.decodeXml(tmStr, "GP");
-                        GD = GD +DecodeXml.decodeXml(tmStr, "GD")+";";
-                    } catch (Exception e) {
-                        Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
-                    }
+                        if (etGpForm.getText().toString().equals("")) {
+                        GD = "";
+                        }
                     if(etGpForm.getText().toString().contains(GP)){
                         Toast.makeText(this, "请不要重复扫描！", Toast.LENGTH_SHORT).show();
                     }else {
+                        GD = GD +DecodeXml.decodeXml(tmStr, "GD")+";";
                         etGpForm.setText(etGpForm.getText().toString() + GP + ";");
+                    }
+                    } catch (Exception e) {
+                        Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     try {

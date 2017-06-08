@@ -171,13 +171,7 @@ public class FZKSActivity extends BaseActivity implements View.OnClickListener {
                 if (TextUtils.isEmpty(tvZYZ.getText().toString())) {
                     SoundManager.playSound(2, 1);
                     Toast.makeText(FZKSActivity.this, "请扫描作业者！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(tvJDZYLX.getText().toString())) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(FZKSActivity.this, "请选择甲端作业类型！", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(tvYDZYLX.getText().toString())) {
-                    SoundManager.playSound(2, 1);
-                    Toast.makeText(FZKSActivity.this, "请选择乙端作业类型！", Toast.LENGTH_SHORT).show();
-                }else{
+                } else{
                     Thread mThread = new Thread(nextRunnable);
                     mThread.start();
                 }
