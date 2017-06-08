@@ -124,7 +124,7 @@ public class FormScanActivity extends BaseActivity implements OnClickListener {
                 if (etGyForm.getText().toString().equals("7020")){
                     try {
                         GP = DecodeXml.decodeXml(tmStr, "GP");
-                        GD = DecodeXml.decodeXml(tmStr, "GD");
+                        GD = GD +DecodeXml.decodeXml(tmStr, "GD")+";";
                     } catch (Exception e) {
                         Toast.makeText(FormScanActivity.this, "工票条码解析错误", Toast.LENGTH_SHORT).show();
                     }
